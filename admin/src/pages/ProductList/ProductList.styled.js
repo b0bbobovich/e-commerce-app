@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const ProductListContainer = styled.div`
     flex: 4;
-    height: 100%;
+
 `;
 
 export const ProductListItem = styled.div`

@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import {mobile, tablet, desktop, desktopLarge, widescreen } from "../../responsive";
 
 export const Container = styled.div`
+    max-height: 500px;
+    overflow: auto;
     flex: 2;
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -19,15 +22,16 @@ export const Table = styled.table`
 `;
 
 export const TableBody = styled.tbody`
-    
 `;
 
 export const TableRow = styled.tr`
+    ${mobile({display: "flex", flexDirection: "column"})}
 
 `;
 
 export const TableHeader = styled.th`
     text-align: left;
+    ${mobile({display: "none"})};
 `;
 
 export const User = styled.td`
@@ -36,24 +40,30 @@ export const User = styled.td`
     font-weight: 600;
 `;
 
-export const Image = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+
+export const Email = styled.span`
+    flex: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 
 export const Date = styled.td`
+    flex: 2;
     font-weight: 300;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 export const Amount = styled.td`
+    flex: 1;
     font-weight: 300;
 `;
 
 export const Button = styled.button`
+    flex: 1;
     padding: 5px 7px;
     border: none;
     border-radius: 10px;

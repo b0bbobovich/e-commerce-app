@@ -52,11 +52,11 @@ const Home = () => {
     <Container>
       <FeaturedInfo />
       <Chart
-        data={userStats}
-        title="User Analytics"
-        grid
-        dataKey="Active User"
-      />
+          data={userStats}
+          title="User Analytics"
+          grid
+          dataKey="Active User"
+        />
       <WidgetsContainer>
         <WidgetSm />
         <WidgetLg />

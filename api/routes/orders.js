@@ -97,18 +97,83 @@ router.get('/', verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-// GET MONTHLY INCOME
+
+const createIncomesTemplate = () => {
+    // Daily incomes during last 30 days 
+    let dailyTemplate = [];
+    for (let dayOfMonth of [...Array(31).keys()]) {
+        dailyTemplate.push(
+            { _id: dayOfMonth + 1, revenue: 0, orders: 0 }
+        )
+    }
+    // Monthly incomes during last 12 month 
+    let monthlyTemplate = [];
+    for (let monthOfYear of [...Array(12).keys()]) {
+        monthlyTemplate.push(
+            { _id: monthOfYear + 1, revenue: 0, orders: 0 }
+        )
+    }
+    return [dailyTemplate, monthlyTemplate]
+};
+
+const prepareStatsData = (monthlyData, yearData) => {
+    const [dailyTemplate, monthlyTemplate] = createIncomesTemplate();
+    for (dayStats of monthlyData) {
+        const index = dailyTemplate.findIndex((templateItem) => templateItem._id === dayStats._id);
+        if (index !== -1) {
+            dailyTemplate[index] = dayStats;
+        }
+    }
+    for (monthStats of yearData) {
+        const index = monthlyTemplate.findIndex((templateItem) => templateItem._id === monthStats._id);
+        if (index !== -1) {
+            monthlyTemplate[index] = monthStats;
+        }
+    }
+    return {
+        dailyStats: dailyTemplate,
+        monthlyStats: monthlyTemplate
+    } 
+}
+
+// GET INCOME
 router.get('/income', verifyTokenAndAdmin, async (req, res) => {
-    const date = new Date();
-    const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-    const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+
+    const currentDate = new Date();
+    const lastMonth = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
+    const lastYear = new Date(currentDate.setFullYear(currentDate.getFullYear() - 1 ));
 
     try {
         const data = await Order.find({});
-        const income = await Order.aggregate([
+        const monthlyData = await Order.aggregate([
             {
                 $match: {
-                    createdAt: { $gte: previousMonth }
+                    createdAt: {
+                        $gte: lastMonth
+                    }
+                }
+            },
+            {
+                $project: {
+                    day: { $dayOfMonth: '$createdAt' },
+                    sales: '$amount'
+                }
+            },
+            {
+                $group: {
+                    _id: '$day',
+                    revenue: { $sum: '$sales' },
+                    orders: {$sum: 1}
+                }
+            }
+        ]);
+        
+        const yearData = await Order.aggregate([
+            {
+                $match: {
+                    createdAt: {
+                        $gte: lastYear
+                    }
                 }
             },
             {
@@ -120,12 +185,14 @@ router.get('/income', verifyTokenAndAdmin, async (req, res) => {
             {
                 $group: {
                     _id: '$month',
-                    total: { $sum: '$sales' }
+                    revenue: { $sum: '$sales' },
+                    orders: {$sum: 1}
                 }
             }
         ]);
-
-        res.status(200).json(income);
+        
+        const incomeStats = prepareStatsData(monthlyData, yearData);
+        res.status(200).json(incomeStats);
     }
     catch (err) {
         console.log(err)

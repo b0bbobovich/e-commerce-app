@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { desktopLarge } from "../../responsive";
+
 
 export const Container = styled.div`
+  max-height: 500px;
+  overflow: auto;
   flex: 1;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   padding: 20px;
-  margin-right: 20px;
+  margin-bottom: 20px;
+  ${desktopLarge({ marginBottom: "0px", marginRight: "20px" })};
 `;
 
 export const Title = styled.span`
@@ -34,6 +39,7 @@ export const UserContainer = styled.div`
 `;
 
 export const Image = styled.img`
+  flex: 1;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -42,12 +48,17 @@ export const Image = styled.img`
 
 export const User = styled.div`
   display: flex;
+  flex: 3;
   flex-direction: column;
   margin-left: 10px;
 `;
 
 export const Username = styled.span`
+  width: 100px;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 

@@ -3,17 +3,18 @@ import { userRequest } from "../../requestMethods";
 import { format } from "timeago.js"
 import { useSelector } from "react-redux";
 import {
-    Container,
-    Title,
-    Table,
-    TableBody,
-    TableRow,
-    TableHeader,
-    User,
-    Image,
-    Date,
-    Amount,
-    Button
+  Container,
+  Title,
+  Table,
+  TableBody,
+  TableRow,
+  TableHeader,
+  User,
+  Image,
+  Email,
+  Date,
+  Amount,
+  Button
 } from "./WidgetLg.styled";
 
 const WidgetLg = () => {
@@ -25,7 +26,9 @@ const WidgetLg = () => {
       try {
         const res = await userRequest(token).get("orders");
         setOrders(res.data);
-      } catch {}
+      } catch (err) {
+        console.error(err)
+      }
     };
     getOrders();
   }, []);
@@ -42,20 +45,21 @@ const WidgetLg = () => {
               <TableHeader>Status</TableHeader>
             </TableRow>
         </TableBody>             
-              {orders.map((order) => (
+        {orders
+          .sort((a,b) => b.createdAt.localeCompare(a.createdAt))
+          .map((order) => (
                     <TableBody key={order._id}>  
                         <TableRow>
-                            <User>                                                    {/*TODO USER NAME, EMAIL, MB IMG*/}
-                            <span>{order.userId}</span>
-                            </User>
-                            <Date>{format(order.createdAt)}</Date>
-                            <Amount>${order.amount}</Amount>
-                            <td>
-                            <Button type={order.status} />
+                            <User>
+                              <Email>{order.contact.email}</Email>
+                              </User>
+                              <Date>{format(order.createdAt)}</Date>
+                              <Amount>${order.amount}</Amount>
+                              <td>
+                              <Button type={order.status} />
                             </td>
                         </TableRow>
                     </TableBody>    
-      
         ))}
       </Table>
     </Container>

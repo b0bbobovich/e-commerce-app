@@ -2,11 +2,10 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-    flex: 1;
-    height: calc(100vh - 50px);
+    height: 100%;
     background-color: rgb(251, 251, 255);
     position: sticky;
-    top: 50px;
+    top: 0px;
 `;
 
 export const Wrapper = styled.div`
@@ -27,7 +26,6 @@ export const SidebarTitle = styled.h3`
 export const SidebarList = styled.ul`
     list-style: none;
     padding: 5px;
-    
 `;
 
 export const NavLink = styled(Link)`
