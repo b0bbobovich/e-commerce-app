@@ -1,16 +1,39 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { desktop } from "../../responsive.js";
+
+
 
 export const Container = styled.div`
     height: 100%;
     background-color: rgb(251, 251, 255);
     position: sticky;
     top: 0px;
+
 `;
 
 export const Wrapper = styled.div`
     padding: 20px;
     color: #555;
+    position: relative;
+`;
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    border: none;
+    background-color: rgb(251, 251, 255);
+    color: #36454F;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(240, 240, 255);
+    };
+    ${desktop({display: "none"})};
 `;
   
 
@@ -20,7 +43,7 @@ export const SidebarMenu = styled.div`
   
 export const SidebarTitle = styled.h3`
     font-size: 13px;
-    color: rgb(187, 186, 186);
+    color: #D3D3D3;
 `; 
 
 export const SidebarList = styled.ul`
@@ -40,7 +63,7 @@ export const SidebarListItem = styled.li`
     align-items: center;
     border-radius: 10px;
     text-decoration: none !important;
-    color: ${props => props.inactive ? "lightgrey" : "lightblack"};
+    color: ${props => props.inactive ? "#D3D3D3" : "#36454F"};
     &:active,
     ${props => !props.inactive && css`
         &:hover {

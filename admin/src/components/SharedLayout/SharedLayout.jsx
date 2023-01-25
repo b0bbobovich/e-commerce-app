@@ -1,7 +1,7 @@
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 import { Outlet } from "react-router-dom";
-import { Menu } from "@material-ui/icons";
+import { Menu, Close } from "@material-ui/icons";
 
 import {
     ComponentContainer,
@@ -13,12 +13,15 @@ import {
 } from "./SharedLayout.styled";
 
 const SharedLayout = () => {
-    const handleToggle = () => { 
-        
+    const openSidebar = () => { 
+        const sidebar = document.getElementById("navbar-container");
+        sidebar.style.display = "block";
+        sidebar.style.position = "absolute";
+        sidebar.style.top = "0";
+        sidebar.style.left = "0";
     };
-
     return (
-        <ComponentContainer>
+        <ComponentContainer id="main-container">
             <HeaderContainer>
                 <Topbar />
             </HeaderContainer>
@@ -26,7 +29,7 @@ const SharedLayout = () => {
                 <Sidebar />
             </NavbarContainer>
             <ContentContainer>
-                <ToggleBtnContainer onClick={handleToggle}>
+                <ToggleBtnContainer onClick={openSidebar}>
                     <Menu style={{fontSize: "30px"}} />
                     <ToggleLable>Shop Manager</ToggleLable>
                 </ToggleBtnContainer>

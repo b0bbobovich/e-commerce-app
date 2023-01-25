@@ -4,6 +4,7 @@ import {desktop, desktopLarge, widescreen } from "../../responsive";
 
 export const ComponentContainer = styled.div`
     margin-bottom: 50px;
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: 
@@ -36,9 +37,12 @@ export const HeaderContainer = styled.header`
 
 export const NavbarContainer = styled.aside`
     grid-area: sidebar;
+    z-index: 999;
     display: none;
+    height: 100%;
     ${desktop({ display: "block" })};
 `;
+
 
 export const ContentContainer = styled.section`
     grid-area: content;
@@ -51,6 +55,7 @@ export const ToggleBtnContainer = styled.div`
     justify-content: start;
     height: 40px;
     margin: 10px 20px 0 20px;
+    cursor: pointer;
     ${desktop({ display: "none" })};
 `;
 

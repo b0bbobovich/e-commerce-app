@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import {mobile, tablet, desktop, widescreen } from "../../responsive";
-
 
 export const Container = styled.div`
     height: 50px;
