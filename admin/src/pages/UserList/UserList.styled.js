@@ -20,17 +20,17 @@ export const UserImg = styled.div`
 `;
 
 export const EditUser = styled(Link)`
-      border: none;
-      border-radius: 10px;
-      padding: 5px 10px;
-      background-color: #3bb077;
-      color: white;
-      cursor: pointer;
-      margin-right: 20px;
-      text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+    text-decoration: none;
 `;
 
 export const DeleteUser = styled.div`
-      color: red;
-      cursor: pointer;
+    color: red;
+    cursor: pointer;
 `;

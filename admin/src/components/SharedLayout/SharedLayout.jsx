@@ -1,7 +1,7 @@
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 import { Outlet } from "react-router-dom";
-import { Menu, Close } from "@material-ui/icons";
+import { Menu } from "@material-ui/icons";
 
 import {
     ComponentContainer,

@@ -7,6 +7,7 @@ export const ComponentContainer = styled.div`
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     grid-template-areas: 
         "header"
         "content";
@@ -40,12 +41,13 @@ export const NavbarContainer = styled.aside`
     z-index: 999;
     display: none;
     height: 100%;
-    ${desktop({ display: "block" })};
+    ${desktop({ display: "block !important"} )} ;
 `;
 
 
 export const ContentContainer = styled.section`
     grid-area: content;
+
 `;
 
 

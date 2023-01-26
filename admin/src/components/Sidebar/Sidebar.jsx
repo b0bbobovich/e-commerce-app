@@ -30,7 +30,7 @@ const Sidebar = () => {
 
     const closeSidebar = () => { 
         const sidebarContainer = document.getElementById("sidebar-container");
-        sidebarContainer.parentElement.style.display = "inherit";
+        sidebarContainer.parentElement.style.display = "none";
         sidebarContainer.parentElement.style.position = "static";
     };
 
@@ -43,7 +43,7 @@ const Sidebar = () => {
                 <SidebarMenu>
                     <SidebarTitle>Dashboard</SidebarTitle>
                     <SidebarList>
-                        <NavLink to="/">
+                        <NavLink to="/" onClick={closeSidebar}>
                             <SidebarListItem>
                                 <SidebarIcon>
                                     <LineStyle />
@@ -68,7 +68,7 @@ const Sidebar = () => {
                 <SidebarMenu>
                     <SidebarTitle>Quick Menu</SidebarTitle>
                     <SidebarList>
-                        <NavLink to="/users" >
+                        <NavLink to="/users" onClick={closeSidebar}>
                             <SidebarListItem>
                                 <SidebarIcon>
                                     <PermIdentity />
@@ -76,7 +76,7 @@ const Sidebar = () => {
                                 Users
                             </SidebarListItem>
                         </NavLink>
-                        <NavLink to="/products">
+                        <NavLink to="/products" onClick={closeSidebar}>
                             <SidebarListItem>
                                 <SidebarIcon>
                                     <Storefront />

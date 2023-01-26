@@ -6,10 +6,10 @@ import { desktop } from "../../responsive.js";
 
 export const Container = styled.div`
     height: 100%;
+    min-height: 100vh;
     background-color: rgb(251, 251, 255);
     position: sticky;
     top: 0px;
-
 `;
 
 export const Wrapper = styled.div`

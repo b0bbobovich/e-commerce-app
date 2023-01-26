@@ -1,6 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline } from "@material-ui/icons";
-import { useEffect } from "react";
+import {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import {
@@ -8,6 +7,7 @@ import {
   ProductListItem,
   ProductImg,
   ProductTitle,
+  ActionContainer,
   EditProduct,
   DeleteProduct
 } from "./ProductList.styled";
@@ -16,14 +16,15 @@ import {
 const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);                      
-
     
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
+
   const handleDelete = (id) => {
     deleteProduct(id, dispatch);
   };
+
   const columns = [
         {
           field: "_id",
@@ -59,17 +60,15 @@ const ProductList = () => {
           headerName: "Action",
           flex: 1,
           renderCell: (params) => {
-            return (
-                <>
-                    <EditProduct to={"/product/" + params.row._id}>
-                      Edit
-                    </EditProduct>
-                    <DeleteProduct>
-                        <DeleteOutline
-                          onClick={() => handleDelete(params.row._id)}
-                        />
-                    </DeleteProduct>  
-                </>
+              return (
+                <ActionContainer>
+                  <EditProduct to={"/product/" + params.row._id}>
+                    Edit
+                  </EditProduct>
+                  <DeleteProduct onClick={() => handleDelete(params.row._id)}>
+                    Delete
+                  </DeleteProduct> 
+                </ActionContainer>
             );
           },
         },
@@ -82,9 +81,10 @@ const ProductList = () => {
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row._id}
-          pageSize={8}
+          autoPageSize={true}
           checkboxSelection
-        />
+          
+          />
       </ProductListContainer>
     );
 }
