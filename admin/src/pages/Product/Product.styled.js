@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 export const ProductContainer = styled.div`
   flex: 4;
   padding: 20px;
@@ -88,7 +89,7 @@ export const BottomContainer = styled.div`
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 `;
 
-export const UpdateForm = styled.form`
+export const SubmitForm = styled.form`
   display: flex;
   justify-content: space-between;
 `;
@@ -98,12 +99,13 @@ export const FormLeftContainer = styled.div`
   flex-direction: column;
 `;
 
-export const UpdatingItemTitle = styled.label`
+export const InputLabel = styled.label`
   margin: 10px 0;
   color: #454545;
 `;
 
-export const UpdatingItemInput = styled.input`
+
+export const Input = styled.input`
   margin-bottom: 10px;
   border: none;
   padding: 5px;
@@ -111,24 +113,66 @@ export const UpdatingItemInput = styled.input`
 
 `;
 
-export const UploadContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const TextArea = styled.textarea`
 
 `;
 
-export const CurrentProductImg = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 10px;
-  object-fit: contain;
-  margin-right: 20px;
+export const Select = styled.select`
+    margin-bottom: 10px;
+`;
+
+export const Option = styled.option`
+
 `;
 
 export const FormRightContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;  
+`;
+
+export const UploadContainer = styled.div`
+  display: flex;
+  align-items: center;
+  border: 2px solid rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  width: 100%;
+  height: fit-content;
+  margin: 30px 0;
+`;
+
+export const InputFileLabel = styled.label`
+  text-align: center;
+`;
+
+export const CurrentImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-center: center;
+  justify-content: center;
+  margin: 10px
+`;
+
+export const Image = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: contain;
+`;
+
+export const ImageLabel = styled.span`
+  text-align: center;
+  max-width: 200px;
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; 
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+`;
+
+export const UploadInput = styled.input`
+  display: none;
 `;
 
 export const UpdateButton = styled.button`
@@ -141,6 +185,14 @@ export const UpdateButton = styled.button`
   cursor: pointer;
 `;
 
-export const UploadIcon = styled.div`
+export const UploadButton = styled.div`
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  margin: 0 10px;
+`;
+
+
+export const IconLabel = styled.span`
+  margin-left: 5px;
 `;

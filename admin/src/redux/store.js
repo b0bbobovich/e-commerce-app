@@ -1,6 +1,9 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";import { setupListeners } from "@reduxjs/toolkit/query";
+import {productApi} from "./productSlice";
+import storage from "redux-persist/lib/storage";
 import userReducer from "./userSlice";
-import productReducer from "./productSlice";
+
+
 import {
   persistStore,
   persistReducer,
@@ -11,7 +14,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+
 
 const persistConfig = {
   key: "root",
@@ -21,7 +24,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  product: productReducer,
+  [productApi.reducerPath]: productApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,11 +32,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
+    getDefaultMiddleware(
+      {serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+      },},   
+    ).concat(productApi.middleware),
 });
+
+setupListeners(store.dispatch)
 
 export let persistor = persistStore(store);

@@ -47,7 +47,6 @@ export const NavbarContainer = styled.aside`
 
 export const ContentContainer = styled.section`
     grid-area: content;
-
 `;
 
 

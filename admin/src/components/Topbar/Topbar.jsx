@@ -1,5 +1,5 @@
 import React from "react";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import { ExitToApp, Language, Settings,  } from "@material-ui/icons";
 import {
   Container,
   Wrapper,
@@ -10,8 +10,24 @@ import {
   IconBadge,
   Avatar
 } from "./Topbar.styled";
+import { userRequest } from "../../requestMethods";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/userSlice";
 
 const Topbar = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.user.currentUser.accessToken);
+
+  const handleLogout = async () => {
+  try {
+    await userRequest(token).post("/auth/logout");
+    dispatch(logout());
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
   return (
     <Container>
       <Wrapper>
@@ -19,9 +35,8 @@ const Topbar = () => {
           <Logo>.STORE</Logo>
         </Left>
         <Right>
-          <IconContainer>
-            <NotificationsNone />
-            <IconBadge>2</IconBadge>
+          <IconContainer onClick={handleLogout}>
+            <ExitToApp />
           </IconContainer>
           <IconContainer>
             <Language />

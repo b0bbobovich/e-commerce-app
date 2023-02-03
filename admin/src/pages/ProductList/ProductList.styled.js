@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const ProductListContainer = styled.div`
@@ -46,4 +46,28 @@ export const EditProduct = styled(Link)`
 export const DeleteProduct = styled.div`
     color: red;
     cursor: pointer;
+`;
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const PreloaderContainer = styled.div`
+    display: flex;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Preloader = styled.img`
+    wisth: 34px;
+    height: 34px;
+    animation: ${rotate360} 1s linear infinite;
+    transform: translateZ(0);
+
 `;
