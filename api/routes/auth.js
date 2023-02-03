@@ -55,7 +55,6 @@ router.post('/login', async (req, res) => {
         );
         
         const { password, ...others } = user._doc;
-
         res.status(200).json({...others, accessToken});
     }
     catch (err) {
@@ -66,14 +65,10 @@ router.post('/login', async (req, res) => {
 
 
 //LOGOUT
-
-// router.post('/logout', verifyToken, async (req, res) => {
-//     const refreshToken = req.body.token;
-
-
-//     res.status(200).json('You logged out successfully!')
-
-// })
+router.post('/logout', verifyToken, async (req, res) => {
+    // here can be some logic to unsign logged user token 
+    res.status(200).json('You logged out successfully!')
+})
 
 module.exports = router;
 
