@@ -1,11 +1,11 @@
-import Home from './pages/Home';
-import Product from './pages/Product';
-import ProductList from './pages/ProductList';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Cart from './pages/Cart';
-import SharedLayout from './components/SharedLayout';
-import Checkout from './pages/Checkout';
+import Home from './pages/Home/Home';
+import Product from './pages/Product/Product';
+import ProductList from './pages/ProductList/ProductList';
+import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
+import Cart from './pages/Cart/Cart';
+import SharedLayout from './components/SharedLayout/SharedLayout';
+import Checkout from './pages/Checkout/Checkout';
 import {
   Routes,
   Route,
@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 
 function App() {
-  const user = useSelector((state)=> state.user.currentUser);
+  const user = useSelector(state => state.user.currentUser);
 
   return (
       <Routes>

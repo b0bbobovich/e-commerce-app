@@ -1,48 +1,18 @@
-import { red } from "@material-ui/core/colors";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import styled from "styled-components";
+import Footer from "../../components/Footer/Footer";
+import Newsletter from "../../components/Newsletter/Newsletter";
+import Products from "../../components/Products/Products";
+import {
+    Container,
+    Title,
+    FilterContainer,
+    Filter,
+    FilterText,
+    Select,
+    Option
+} from "./ProductList.styled";
 
-import Footer from "../components/Footer";
-import Newsletter from "../components/Newsletter";
-import Products from "../components/Products";
-import { mobile } from "../responsive";
-
-const Container = styled.div`
-
-`;
-
-const Title = styled.h1`
-    margin: 20px;
-`;
-
-const FilterContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
-const Filter = styled.div`
-    margin: 20px;
-    ${mobile({ margin: "0 20px", display: "flex", flexDirection: "column"})};
-`;
-
-const FilterText = styled.span`
-    font-size: 20px;
-    font-weight: 600;
-    margin-right: 20px;
-    ${mobile({ marginRight: "0"})};
-
-`;
-
-const Select = styled.select`
-    padding: 10px;
-    margin-right: 20px;
-    ${mobile({ margin: "10px 0"})};
-`;
-
-const Option = styled.option`
-    
-`;
 
 const ProductList = () => {
     const [filters, setFilters] = useState({});
@@ -51,6 +21,9 @@ const ProductList = () => {
     const location = useLocation();
     const category = location.pathname.split("/")[2];
     
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     const handleFilters = (event) => {
         const value = event.target.value;

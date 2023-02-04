@@ -1,11 +1,8 @@
 import { Outlet } from "react-router-dom";
-import styled from "styled-components";
-import Announcement from "./Announcement";
-import Navbar from "./Navbar";
+import Announcement from "../Announcement/Announcement";
+import Navbar from "../Navbar/Navbar";
+import { Container } from "./SharedLayout.styled";
 
-const Container = styled.div`
-
-`;
 
 const SharedLayout = () => {
     return (

@@ -1,148 +1,33 @@
 import {useEffect, useState} from "react";
-import styled from "styled-components";
-import Footer from "../components/Footer";
-import { mobile } from "../responsive";
+import Footer from "../../components/Footer/Footer";
 import { useSelector } from "react-redux";
-import { userRequest, liqpayRequest } from "../requestsMethods";
+import { userRequest } from "../../requestsMethods";
 import axios from "axios";
-
-
-
-const Container = styled.div`
-
-`;
-
-const TopBar = styled.div`
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    padding: 20px;
-`;
-
-const LeftBar = styled.div`
-    flex: 2;
-`;
-
-const RightBar = styled.div`
-    flex: 1;
-    border: 0.5px solid lightgray;
-    border-radius: 10px;
-    padding: 20px;
-    height: max-content;
-`;
-
-
-const SectionInfo = styled.div`
-    margin-top: 10px;
-`;
-
-const SectionTitle = styled.span`
-    font-weight: 700;
-    font-size: 20px;
-`;
-
-const Product = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    ${mobile({ flexDirection: "column" })};
-`;
-
-const ProductDetails = styled.div`
-    flex: 2;
-    display: flex;   
-`;
-
-const Image = styled.img`
-    width: 100px;
-`;
-
-const Details = styled.div`
-    padding: 20px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    ${mobile({ })};
-`;
-
-const ProductName = styled.span`
-
-`;
-
-
-const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props=>props.color};
-`;
-
-const ProductSize = styled.span`
-
-`;
-
-
-const OrderDetailsContainer = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-`;
-
-const OrderDetailsTitle = styled.span`
-    font-weight: 800;
-`;
-
-const OrderDetails = styled.div`
-    font-size: 24px;
-    margin: 5px;
-    ${mobile({ margin: "5px 15px"})};
-`;
-
-const SummaryTitle = styled.h1`
-    font-weight: 200;
-`;
-
-const SummaryItem = styled.div`
-    margin: 30px 0;
-    display: flex;
-    justify-content: space-between;
-    font-weight: ${props => props.type === "total" && "500"};
-    font-size: ${props => props.type === "total" && "24px"};
-`;
-
-const SummaryItemText = styled.span`
-`;
-
-const SummaryButton = styled.button`
-    width: 100%;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-`;
-
-const Hr = styled.hr`
-    background-color: #eee;
-    border: none;
-    height: 1px;
-`;
-
-const InputContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px;
-`;
-
-const Input = styled.input`
-    padding: 10px;
-    margin: 5px;
-    width: 100%;
-    border: 0.5px solid lightgray;
-`;
+import {
+    Container,
+    TopBar,
+    LeftBar,
+    RightBar,
+    SectionInfo,
+    SectionTitle,
+    Product,
+    ProductDetails,
+    Image,
+    Details,
+    ProductName,
+    ProductColor,
+    ProductSize,
+    OrderDetailsContainer,
+    OrderDetailsTitle,
+    OrderDetails,
+    SummaryTitle,
+    SummaryItem,
+    SummaryItemText,
+    SummaryButton,
+    Hr,
+    InputContainer,
+    Input,
+} from "./Checkout.styled";
 
 
 const Checkout = () => {
