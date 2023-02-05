@@ -12,7 +12,8 @@ You can create new user, products, orders and carts. You can delete/update user,
 ### CREDENTIALS   
 Non-Admin User:  
 - login: solomon  
-- passwd: solomon  
+- passwd: solomon   
+
 Admin User:   
 - login: admin  
 - passwd: admin  
