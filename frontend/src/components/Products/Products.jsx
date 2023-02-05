@@ -14,8 +14,8 @@ const Products = ({ category, filters, sort }) => {
                 const res = await axios.get(
                     
                     category
-                        ? `http://localhost:5000/api/v1/products?category=${category}`
-                        : "http://localhost:5000/api/v1/products"
+                        ? `https://boboshop-api.onrender.com/api/v1/products?category=${category}`
+                        : "https://boboshop-api.onrender.com/api/v1/products"
                 );
                 setProducts(res.data);
             }
