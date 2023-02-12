@@ -40,4 +40,8 @@ export const Button = styled.button`
     color: gray;
     cursor: pointer;
     font-weight: 600;
+    transition: transform 0.5s;
+    &:hover {
+        transform: scale(1.1);
+    }
 `;

@@ -1,6 +1,24 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { mobile } from '../../responsive';
 import { Link } from "react-router-dom";
+import { Search, ShoppingCartOutlined, ExitToApp } from "@material-ui/icons";
+
+const Icon = css`
+    fontSize: 16px;
+    cursor: pointer;
+`;
+
+export const SearchIcon = styled(Search)`
+    ${Icon}
+`;
+
+export const CartIcon = styled(ShoppingCartOutlined)`
+    ${Icon}
+`;
+
+export const ExitIcon = styled(ExitToApp)`
+    ${Icon}
+`;
 
 export const NavLink = styled(Link)`
     text-decoration: none;

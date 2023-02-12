@@ -10,29 +10,28 @@ const Products = ({ category, filters, sort }) => {
 
     useEffect(() => {
         const getProducts = async () => {
-            try {
-                const res = await axios.get(
-                    
-                    category
-                        ? `https://boboshop-api.onrender.com/api/v1/products?category=${category}`
-                        : "https://boboshop-api.onrender.com/api/v1/products"
-                );
-                setProducts(res.data);
-            }
-            catch (err) { console.error(err) }
+            await axios.get(
+                category
+                    ? `https://boboshop-api.onrender.com/api/v1/products?category=${category}`
+                    : "https://boboshop-api.onrender.com/api/v1/products"
+            ).then(
+                res => setProducts(res.data)
+            ).catch(
+                err => console.error(err)
+            )
         }
         getProducts();
     }, [category]);
 
     useEffect(() => {
-        category && setFilteredProducts(
-            products.filter(item => Object.entries(filters).every(([key, value]) =>
-                (item[key].includes(value))
+        if (filters) {
+            setFilteredProducts(
+                products.filter(item => Object.entries(filters).every(([key, value]) =>
+                    (item[key].includes(value))
                 )
-            )
-            )
-        
-    }, [products, category, filters]);
+                ));
+        }
+    }, [products, filters]);
 
     useEffect(() => {
         if (sort === "newest") {
@@ -49,9 +48,9 @@ const Products = ({ category, filters, sort }) => {
         }
     }, [sort]);
 
-    return (
+    return ( 
         <Container>
-            {category     
+            {filteredProducts     
                 ?   filteredProducts.map(item => (
                     <Product item={item} key={item._id} />
                 )) 
@@ -60,10 +59,8 @@ const Products = ({ category, filters, sort }) => {
                     .map(item => (
                         <Product item={item} key={item._id} />
                 ))
-                
             }
         </Container>
-        
     )
 }
 

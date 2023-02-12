@@ -10,7 +10,7 @@ import {
     Filter,
     FilterText,
     Select,
-    Option
+    Option,
 } from "./ProductList.styled";
 
 
@@ -35,7 +35,7 @@ const ProductList = () => {
 
     return (
         <Container>
-            <Title>{category.charAt(0).toUpperCase() + category.slice(1)}</Title>
+            <Title>{category ? category.charAt(0).toUpperCase() + category.slice(1) : ""}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>

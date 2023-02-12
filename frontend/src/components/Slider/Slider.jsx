@@ -13,6 +13,7 @@ import {
     Title,
     Description,
     Button,
+    NavLink
 } from "./Slider.styled";
 
 const Slider = () => {
@@ -40,7 +41,10 @@ const Slider = () => {
                         <InfoContainer>
                             <Title>{item.title}</Title>
                             <Description>{item.description}</Description>
-                            <Button>SHOP NOW</Button>
+                            <NavLink to="/products">
+                                <Button>SHOP NOW</Button>
+                            </NavLink>
+                            
                         </InfoContainer>
                     </Slide>
                 )}

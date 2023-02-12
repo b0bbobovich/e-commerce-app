@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 100%;
@@ -78,4 +79,13 @@ export const Button = styled.button`
     font-size: 20px;
     background-color: transparent;
     cursor: pointer;
+    transition: transform 0.5s;
+    &:hover {
+        transform: scale(1.1);
+    }
+`;
+
+export const NavLink = styled(Link)`
+    text-decoration: none;
+    color: black;
 `;

@@ -1,7 +1,7 @@
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { Search, ShoppingCartOutlined, ExitToApp } from "@material-ui/icons";
 import React from "react";
 import Badge from '@material-ui/core/Badge';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     NavLink,
     Container,
@@ -13,13 +13,22 @@ import {
     Center,
     Logo,
     Right,
-    MenuItem
+    MenuItem,
+    SearchIcon,
+    CartIcon,
+    ExitIcon
 } from "./Navbar.styled";
+import { logout } from "../../redux/userSlice";
 
 
 const Navbar = () => {
     const quantity = useSelector(state => state.cart.quantity);
     const user = useSelector(state => state.user.currentUser);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+    };
 
     return (
         <Container>
@@ -27,7 +36,7 @@ const Navbar = () => {
                 <Left>
                     <Language>EN</Language>
                     <SearchContainer>
-                        <Search style={{color: "grey", fontSize: 16}} />
+                        <SearchIcon />
                         <Input placeholder="Search" autoComplete="off"/>
                     </SearchContainer>
                 </Left>
@@ -39,7 +48,8 @@ const Navbar = () => {
                     </NavLink>
                 </Center>
                 <Right>
-                    {!user &&
+                    {!user
+                        ?
                         <>
                             <NavLink to="/register">
                                 <MenuItem >REGISTER</MenuItem>
@@ -48,11 +58,12 @@ const Navbar = () => {
                                 <MenuItem>SIGN IN</MenuItem>
                             </NavLink>
                         </>
+                        : <ExitIcon onClick={handleLogout} />
                     }
                     <NavLink to="/cart">
                         <MenuItem>
                             <Badge badgeContent={quantity} overlap="rectangular" color="primary">
-                                <ShoppingCartOutlined/>
+                                <CartIcon />
                             </Badge>
                         </MenuItem>
                     </NavLink>
