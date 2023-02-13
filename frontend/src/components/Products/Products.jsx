@@ -1,36 +1,52 @@
 import { useState, useEffect } from "react";
 import Product from "../Product/Product";
 import axios from "axios";
-import { Container } from "./Products.styled";
+import { Container, Preloader, PreloaderContainer } from "./Products.styled";
 
 
 const Products = ({ category, filters, sort }) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(false);
+    
     useEffect(() => {
+        setIsLoading(true);
         const getProducts = async () => {
-            await axios.get(
-                category
-                    ? `https://boboshop-api.onrender.com/api/v1/products?category=${category}`
-                    : "https://boboshop-api.onrender.com/api/v1/products"
-            ).then(
-                res => setProducts(res.data)
-            ).catch(
-                err => console.error(err)
-            )
-        }
+            try {
+                const res = await axios.get(
+                    category
+                        ? `https://boboshop-api.onrender.com/api/v1/products?category=${category}`
+                        : "https://boboshop-api.onrender.com/api/v1/products"
+                )
+                setProducts(res.data)
+            }
+            catch (err) {
+                console.error(err)
+            }
+            finally {
+                setIsLoading(false)
+            }
+            
+        };
         getProducts();
     }, [category]);
 
+
     useEffect(() => {
         if (filters) {
+            console.log(filters)
+            
             setFilteredProducts(
                 products.filter(item => Object.entries(filters).every(([key, value]) =>
                     (item[key].includes(value))
                 )
-                ));
+                )
+            );
         }
+        else {
+            setFilteredProducts(products);
+        }
+
     }, [products, filters]);
 
     useEffect(() => {
@@ -48,20 +64,33 @@ const Products = ({ category, filters, sort }) => {
         }
     }, [sort]);
 
+
+    if (isLoading) {
+        return (
+            <PreloaderContainer>
+                <Preloader src={process.env.PUBLIC_URL + "/preloaderLogo.svg"} />
+            </PreloaderContainer>   
+        )
+    }
+
+
     return ( 
-        <Container>
-            {filteredProducts     
-                ?   filteredProducts.map(item => (
+        <Container>        
+            {filters
+            ?   filteredProducts.map(item => (
+                <Product item={item} key={item._id} />
+            )) 
+            : products
+                .slice(0, 8)
+                .map(item => (
                     <Product item={item} key={item._id} />
-                )) 
-                : products
-                    .slice(0, 8)
-                    .map(item => (
-                        <Product item={item} key={item._id} />
-                ))
-            }
+            ))
+            }       
         </Container>
     )
+    
+
+
 }
 
 export default Products

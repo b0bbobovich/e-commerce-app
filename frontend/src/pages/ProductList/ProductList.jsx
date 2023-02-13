@@ -10,7 +10,7 @@ import {
     Filter,
     FilterText,
     Select,
-    Option,
+    Option
 } from "./ProductList.styled";
 
 
@@ -26,11 +26,18 @@ const ProductList = () => {
       }, [])
 
     const handleFilters = (event) => {
-        const value = event.target.value;
-        setFilters({
-            ...filters,
-            [event.target.name]: value,
-        })
+        const target = event.target;
+        if (target.value === "All") {
+            let updatedFilters = { ...filters };
+            delete updatedFilters[target.name];
+            setFilters(updatedFilters)
+        }
+        else {
+            setFilters({
+                ...filters,
+                [event.target.name]: target.value,
+            })
+        }
     };
 
     return (
@@ -45,6 +52,7 @@ const ProductList = () => {
                         <Option disabled>
                             Color
                         </Option>
+                        <Option>All</Option>
                         <Option>White</Option>
                         <Option>Black</Option>
                         <Option>Red</Option>
@@ -57,6 +65,7 @@ const ProductList = () => {
                         <Option disabled>
                             Size
                         </Option>
+                        <Option>All</Option>
                         <Option>XS</Option>
                         <Option>S</Option>
                         <Option>M</Option>

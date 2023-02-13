@@ -54,18 +54,23 @@ const Product = () => {
         getProduct();
     }, [id]);
 
-    const handleQuantity = (type) => {
+    const handleChooseQuantity = (type) => {
         if (type === "dec") {
             quantity > 1 && setQuantity(quantity - 1);
         }
         else {
             setQuantity(quantity + 1);
         }
-    }
+    };
 
-    const handleClick = () => {
+    const handleChooseColor = () => {
+        setColor(color);
+    };
+
+    const handleAddToCart = () => {
         dispatch(addProduct({ ...product, quantity, color, size }));
-    }
+    };
+
     return (
         <Container>
             <Wrapper>
@@ -80,7 +85,7 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>Color:</FilterTitle>
                             {product.color?.map((color) => (
-                                <FilterColor color={color} key={color} onClick={() => setColor(color)} />
+                                <FilterColor color={color} key={color} onClick={handleChooseColor} />
                             ))}
                         </Filter>
                         <Filter>
@@ -94,11 +99,11 @@ const Product = () => {
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>
-                            <Remove onClick={() => handleQuantity("dec")} style={{cursor: "pointer"}} />
+                            <Remove onClick={() => handleChooseQuantity("dec")} style={{cursor: "pointer"}} />
                             <Amount>{quantity}</Amount>
-                            <Add onClick={() => handleQuantity("inc")} style={{cursor: "pointer"}}/>
+                            <Add onClick={() => handleChooseQuantity("inc")} style={{cursor: "pointer"}}/>
                         </AmountContainer>
-                        <Button onClick={handleClick}>ADD TO CART</Button>
+                        <Button onClick={handleAddToCart}>ADD TO CART</Button>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
