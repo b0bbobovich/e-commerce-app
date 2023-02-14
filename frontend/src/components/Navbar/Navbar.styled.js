@@ -43,10 +43,16 @@ export const Left = styled.div`
     align-items: center;
 `;
 
-export const Language = styled.span`
+export const Select = styled.select`
     font-size: 14px;
     cursor: pointer; 
-    ${mobile({ display: "none" })};
+    border: none;
+    padding: 5px;
+    ${'' /* ${mobile({ display: "none" })}; */}
+`;
+
+export const Option = styled.option`
+
 `;
 
 export const SearchContainer = styled.div`

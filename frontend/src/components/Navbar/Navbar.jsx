@@ -7,7 +7,8 @@ import {
     Container,
     Wrapper,
     Left,
-    Language,
+    Select,
+    Option,
     SearchContainer,
     Input,
     Center,
@@ -34,7 +35,10 @@ const Navbar = () => {
         <Container>
             <Wrapper>
                 <Left>
-                    <Language>EN</Language>
+                <Select defaultValue="EN" name="Language">
+                        <Option>EN</Option>
+                        <Option>UA</Option>
+                    </Select>
                     <SearchContainer>
                         <SearchIcon />
                         <Input placeholder="Search" autoComplete="off"/>
