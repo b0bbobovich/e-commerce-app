@@ -1,10 +1,9 @@
-__This is my exploratory project for learning React, Redux, ExpressJS and many other things.__
-
+__This is my exploratory project for learning React, Redux, ExpressJS and many other things.__  
 <br>
 Link to website in the section About.  
-<br>
+
 Link to admin panel below:   
-https://boboshop-admin.onrender.com    
+https://boboshop-admin.onrender.com   
 <br>
 ### CREDENTIALS   
 Non-Admin User:  
@@ -13,5 +12,5 @@ Non-Admin User:
 
 Admin User:   
 - login: admin  
-- passwd: admin  
+- passwd: admin   
 
