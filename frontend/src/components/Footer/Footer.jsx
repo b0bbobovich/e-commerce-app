@@ -11,6 +11,7 @@ import {
     Title,
     List,
     ListItem,
+    NavLink,
     Right,
     ContactItem,
     Payment
@@ -25,16 +26,16 @@ const Footer = () => {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut luctus vulputate tellus, sed convallis ex ultrices nec. Sed porta nulla sem, et rhoncus nisl egestas placerat. Phasellus magna tellus, vestibulum at tincidunt quis, dapibus nec velit. Phasellus eu dolor quis tellus cursus pretium. Phasellus fermentum bibendum felis, sit amet cursus neque blandit ac. Maecenas vehicula iaculis dui, nec pulvinar dolor rhoncus sed.
                 </Description>
                 <SocialContainer>
-                    <SocialIcon color="3B5999">
+                    <SocialIcon color="3B5999" href="https://www.facebook.com">
                         <Facebook/>
                     </SocialIcon>
-                    <SocialIcon color="E4405F">
+                    <SocialIcon color="E4405F" href="https://www.instagram.com">
                         <Instagram/>
                     </SocialIcon>
-                    <SocialIcon color="55ACEE">
+                    <SocialIcon color="55ACEE" href="https://twitter.com">
                         <Twitter/>
                     </SocialIcon>
-                    <SocialIcon color="E60023">
+                    <SocialIcon color="E60023" href="https://www.pinterest.com">
                         <Pinterest/>
                     </SocialIcon>
                 </SocialContainer>
@@ -42,8 +43,12 @@ const Footer = () => {
             <Center>
                 <Title>Useful Links</Title>
                 <List>
-                    <ListItem>Home</ListItem>
-                    <ListItem>Cart</ListItem>
+                    <ListItem>
+                        <NavLink to="/">Home</NavLink>
+                    </ListItem>
+                    <ListItem>
+                        <NavLink to="/cart">Cart</NavLink>
+                    </ListItem>
                     <ListItem>Woman Fashion</ListItem>
                     <ListItem>Accessories</ListItem>
                     <ListItem>My Account</ListItem>

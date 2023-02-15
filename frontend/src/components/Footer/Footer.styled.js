@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
-
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     display: flex;
@@ -28,7 +28,7 @@ export const SocialContainer = styled.div`
     display: flex;
 `;
 
-export const SocialIcon = styled.div`
+export const SocialIcon = styled.a`
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -63,6 +63,10 @@ export const ListItem = styled.li`
     width: 50%;
     margin-bottom: 10px;
     cursor: pointer;
+`;
+
+export const NavLink = styled(Link)`
+    text-decoration: none;
 `;
 
 export const Right = styled.div`
