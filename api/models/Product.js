@@ -11,10 +11,6 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        images: {
-            type: String,
-            required: true
-        },
         composition: {
             type: String
         },
@@ -26,10 +22,13 @@ const ProductSchema = new mongoose.Schema(
             type: Array
         },
         size: {
-            type: Array
+            type: Array,
+            default: []
         },
         colors: {
-            type: Array
+            type: [Object],
+            default: []
+            
         },
         inStock: {
             type: Boolean,
