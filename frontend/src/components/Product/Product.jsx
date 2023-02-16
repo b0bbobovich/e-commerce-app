@@ -10,11 +10,12 @@ import {
 } from "./Product.styled";
 
 
-const Product = ({item}) => {
+const Product = ({ item }) => {
+
     return (
         <Container>
             <Circle />
-            <Image src={item.img} />
+            <Image src={item.colors[0].images[1]} />
             <Info>
                 <Icon>
                     <ShoppingCartOutlined/>  

@@ -34,8 +34,6 @@ const Products = ({ category, filters, sort }) => {
 
     useEffect(() => {
         if (filters) {
-            console.log(filters)
-            
             setFilteredProducts(
                 products.filter(item => Object.entries(filters).every(([key, value]) =>
                     (item[key].includes(value))
@@ -73,7 +71,6 @@ const Products = ({ category, filters, sort }) => {
         )
     }
 
-
     return ( 
         <Container>        
             {filters
@@ -88,9 +85,6 @@ const Products = ({ category, filters, sort }) => {
             }       
         </Container>
     )
-    
-
-
 }
 
 export default Products

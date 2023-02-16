@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import { mobile } from "../../responsive";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+
+`;
 
 export const Wrapper = styled.div`
     padding: 50px;
@@ -9,13 +11,60 @@ export const Wrapper = styled.div`
     ${mobile({ padding: "10px", flexDirection: "column"})};
 `;
 
-export const ImageContainer = styled.div`
+export const SliderContainer = styled.div`
     flex: 1;
+    position: relative;
+    width: auto;
+    height: 100vh;
+    overflow: hidden;
+    -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* hide scrollbar in Firefox */
+`;
+
+export const SlideWrapper = styled.div`
+    width: ${props => props.width};
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.5s ease;
+    transform: translateX(${props => props.displacement});
+`;
+
+export const Arrow = styled.div`
+    width: 30px;
+    height: 30px;
+    background-color: #fff7f7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: ${props=>props.direction === "left" && "10px"};
+    right: ${props=>props.direction === "right" && "10px"};
+    margin: auto;
+    cursor: pointer;
+    opacity: 0.5;
+    z-index: 2;
+`;
+
+export const Slide = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+
+export const ImageContainer = styled.div` 
+    flex: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
 `;
 
 export const Image = styled.img`
     width: 100%;
-    max-height: 90vh;
+    height: 100%;
     object-fit: contain;
     ${mobile({height: "40vh"})};
 `;
@@ -57,22 +106,12 @@ export const FilterTitle = styled.span`
     font-weight: 200;
 `;
 
-export const FilterColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props => props.color};
-    margin: 0 5px;
-    cursor: pointer;
-    box-sizing: border-box;
-`;
-
-export const FilterSize = styled.select`
+export const Select = styled.select`
     margin-left: 10px;
     padding: 5px;
 `;
 
-export const FilterSizeOption = styled.option``;
+export const Option = styled.option``;
 
 export const AddContainer = styled.div`
     width: 50%;
@@ -108,4 +147,27 @@ export const Button = styled.button`
     &: hover {
         background-color: #f8f4f4;
     }
+`;
+
+export const PreloaderContainer = styled.div`
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Preloader = styled.img`
+    width: 34px;
+    height: 34px;
+    animation: ${rotate360} 1s linear infinite;
+    transform: translateZ(0);
 `;

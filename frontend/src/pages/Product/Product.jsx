@@ -9,6 +9,10 @@ import { useDispatch } from "react-redux";
 import {
     Container,
     Wrapper,
+    SliderContainer,
+    Arrow,
+    SlideWrapper,
+    Slide,
     ImageContainer,
     Image,
     InfoContainer,
@@ -18,14 +22,16 @@ import {
     FilterContainer,
     Filter,
     FilterTitle,
-    FilterColor,
-    FilterSize,
-    FilterSizeOption,
+    Select,
+    Option,
     AddContainer,
     AmountContainer,
     Amount,
     Button,
+    PreloaderContainer,
+    Preloader
 } from "./Product.styled";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 
 
 const Product = () => {
@@ -33,26 +39,39 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
+    const [images, setImages] = useState(["/noImage.png"]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [slideIndex, setSlideIndex] = useState(0);
     const location = useLocation();
     const dispatch = useDispatch();
     const id = location.pathname.split("/")[2];
 
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
-
+    }, [])
+    
     useEffect(() => {
+        setIsLoading(true);
         const getProduct = async () => {
             try {
                 const res = await publicRequest.get("/products/find/" + id);
                 setProduct(res.data);
+                setSize(res.data.sizes[0]);
+                if (res.data.colors.length > 0) {
+                    setColor(res.data.colors[0].color);
+                    setImages(res.data.colors[0].images);
+                }
             }
             catch (err) {
                 console.error(err);
             }
+            finally {
+                setIsLoading(false);
+            }
         };
         getProduct();
     }, [id]);
+
 
     const handleChooseQuantity = (type) => {
         if (type === "dec") {
@@ -63,39 +82,82 @@ const Product = () => {
         }
     };
 
-    const handleChooseColor = () => {
-        setColor(color);
+    const handleChooseColor = (event) => {
+        event.preventDefault();
+        const newColor = event.target.value;
+        setColor(newColor);
+        setImages(product.colors.find(item => item.color === newColor).images);
+        setSlideIndex(0);
     };
 
     const handleAddToCart = () => {
         dispatch(addProduct({ ...product, quantity, color, size }));
     };
 
+    const handleClick = (direction) => {
+        const lastIndex = images.length - 1;
+        if (direction === "left") {
+            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : lastIndex)
+        }
+        else {
+            setSlideIndex(slideIndex < lastIndex ? slideIndex + 1 : 0)
+        }
+    };
+
+    if (isLoading) {
+        return (
+            <PreloaderContainer>
+                <Preloader src={process.env.PUBLIC_URL + "/preloaderLogo.svg"} />
+            </PreloaderContainer>   
+        )
+    }
+
     return (
         <Container>
             <Wrapper>
-                <ImageContainer>
-                    {<Image src={product.img}/>}
-                </ImageContainer>
+                <SliderContainer>
+                    <Arrow direction="left" onClick={()=>handleClick("left")}>
+                        <ArrowLeftOutlined/>
+                    </Arrow>
+                    <SlideWrapper displacement={`-${slideIndex * (100 / images.length)}%`} width={`${images.length * 100}%`}>
+                        {images.map((image, index) => 
+                            <Slide key={index}>
+                                <ImageContainer>
+                                    <Image src={image} alt="product_image"/>
+                                </ImageContainer>
+                            </Slide>
+                        )}
+                    </SlideWrapper>
+                    <Arrow direction="right" onClick={()=>handleClick("right")}>
+                        <ArrowRightOutlined/>
+                    </Arrow>
+                </SliderContainer>
                 <InfoContainer>
                     <Title>{product.title}</Title>
                     <Description>{product.description}</Description>
                     <Price>$ {product.price}</Price>
                     <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Color:</FilterTitle>
-                            {product.color?.map((color) => (
-                                <FilterColor color={color} key={color} onClick={handleChooseColor} />
-                            ))}
-                        </Filter>
-                        <Filter>
+                        {color && 
+                            <Filter>
+                                <FilterTitle>Color:</FilterTitle>
+                                <Select value={color} onChange={handleChooseColor}>
+                                    {product.colors?.map((item) => (
+                                        <Option key={item.color}>{item.color}</Option>
+                                        ))
+                                    }
+                                </Select>
+                            </Filter>   
+                        }
+                        {size &&
+                            <Filter>
                             <FilterTitle>Size:</FilterTitle>
-                            <FilterSize onChange={(event) => setSize(event.target.value)}>
-                                {product.size?.map((size) => (
-                                    <FilterSizeOption key={size}>{size}</FilterSizeOption>
+                            <Select value={size || "Size"} onChange={(event) => setSize(event.target.value)}>
+                                {product.sizes?.map((size) => (
+                                    <Option key={size}>{size}</Option>
                                 ))}
-                            </FilterSize>
-                        </Filter>
+                            </Select>
+                            </Filter>
+                        }
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>
@@ -112,6 +174,8 @@ const Product = () => {
             
         </Container>
     )
+    
+
 }
 
 export default Product
