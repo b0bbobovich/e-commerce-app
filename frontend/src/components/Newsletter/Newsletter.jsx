@@ -19,8 +19,10 @@ const Newsletter = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // here can be additional email validation logic
-        setIsSubscribed(true);
-        setIsOpenSnackbar(true)
+        if (event.target.value) {
+            setIsSubscribed(true);
+            setIsOpenSnackbar(true)
+        };
     };
 
     const Alert = forwardRef(function Alert(props, ref) {
