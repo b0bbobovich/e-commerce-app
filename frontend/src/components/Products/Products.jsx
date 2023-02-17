@@ -35,19 +35,21 @@ const Products = ({ category, filters, sort }) => {
     useEffect(() => {
         if (filters) {
             setFilteredProducts(
-                products.filter(item => Object.entries(filters).every(([key, value]) => {
-                    if (key === "sizes") {
-                        return item[key].includes(value);
+                products.filter(product => Object
+                    .entries(filters)
+                    .every(([filterCategory, filterValue]) => {
+
+                    if (filterCategory === "sizes") {
+                        return product[filterCategory].includes(filterValue);
                     }
+                    /// filterCategory === "color"
                     else {
-                        return item[key].some(
+                        return product[filterCategory].some(
                             element => element.color
                                 .split(/,| /)
-                                .includes(value));
+                                .includes(filterValue));
                     }
-                }
-                )
-                )
+                }))
             );
         }
         else {
