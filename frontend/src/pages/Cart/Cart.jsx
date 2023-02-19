@@ -64,7 +64,10 @@ const Cart = () => {
                                             <b>ID: </b>
                                             {product._id}
                                         </ProductId>
-                                        <ProductColor color={product.color} />
+                                        <ProductColor>
+                                            <b>Color: </b>
+                                            {product.color}
+                                        </ProductColor>
                                         <ProductSize>
                                             <b>Size: </b>
                                             {product.size}
