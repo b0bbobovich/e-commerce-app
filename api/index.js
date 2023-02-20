@@ -15,18 +15,12 @@ const app = express();
 dotenv.config();
 
 
-const allowlist = ["http://localhost:3000", "http://localhost:3001", "https://boboshop.onrender.com", "https://boboshop-admin.onrender.com"];
-const corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (allowlist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
+const corsOptions = {
+    origin: ["http://localhost:3000", "http://localhost:3001", "https://boboshop.onrender.com", "https://boboshop-admin.onrender.com"],
 }
 
-app.use(cors(corsOptionsDelegate));
+app.use(cors(corsOptions));
+
 
 mongoose
     .connect(process.env.MONGO_URL)
