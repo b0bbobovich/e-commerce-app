@@ -45,7 +45,7 @@ const Register = () => {
             setIsRegisterSuccess(true);
         }
         catch (err) {
-            if (err.response.status === 520) {
+            if (err.response?.status === 520) {
                 setExistError(err.response.data)
             }
         }
