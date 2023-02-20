@@ -7,12 +7,14 @@ const {verifyToken} = require('./verifyToken')
 
 // Register
 router.post('/register', async (req, res) => {
-    if (req.body.username && req.body.password && req.body.email) {
+    if (req.body.username
+        && req.body.password && req.body.email && req.body.firstName && req.body.lastName) {
         const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             username: req.body.username,
             email: req.body.email,
             password: cryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString()
-            
         });
 
         try {
@@ -20,12 +22,11 @@ router.post('/register', async (req, res) => {
             res.status(201).json(savedUser);
         }
         catch (err) {
-            console.log(err)
-            res.status(500).json(err);
+            res.status(520).json("A user with such username or email already exist!");
         }
     }
     else {
-        res.status(500).json('Please fill in all fields!')
+        res.status(420).json('Please fill in all fields!')
     }
 })
 
