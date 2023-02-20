@@ -19,7 +19,7 @@ const Login = () => {
     const { isFetching, error } = useSelector((state) => state.user); 
 
 
-    const handleClick = (event) => {
+    const handleLogin = (event) => {
         event.preventDefault();
         login(dispatch, { username, password });
     }
@@ -30,7 +30,7 @@ const Login = () => {
             <Form>
                 <Input placeholder="username" onChange={(event) => {setUsername(event.target.value)}}></Input>
                 <Input placeholder="password" type="password" onChange={(event) => {setPassword(event.target.value)}}></Input>
-                <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>    
+                <Button onClick={handleLogin} disabled={isFetching}>LOGIN</Button>    
                 {error && <Error>Something went wrong...</Error>}
                 <Link>DON`T REMEMBER THE PASSWORD?</Link>
                 <Link>CREATE A NEW ACCOUNT</Link>
