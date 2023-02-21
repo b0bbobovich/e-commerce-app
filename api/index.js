@@ -17,6 +17,9 @@ dotenv.config();
 
 const corsOptions = {
     origin: ["http://localhost:3000", "http://localhost:3001", "https://boboshop.onrender.com", "https://boboshop-admin.onrender.com"],
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Authorization", "Content-Type"]
 }
 
 app.use(cors(corsOptions));
