@@ -7,7 +7,7 @@ const DEV_URL = "http://localhost:5000/api/v1";
 
 
 export const publicRequest = axios.create({
-    baseURL: PROD_URL
+    baseURL: DEV_URL
 });
 
 export const userRequest = () => {
