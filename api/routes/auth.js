@@ -7,8 +7,7 @@ const {verifyToken} = require('./verifyToken')
 
 // Register
 router.post('/register', async (req, res) => {
-    if (req.body.username
-        && req.body.password && req.body.email && req.body.firstName && req.body.lastName) {
+    if (req.body.username && req.body.password && req.body.email && req.body.firstName && req.body.lastName) {
         const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -32,6 +31,7 @@ router.post('/register', async (req, res) => {
 
 // LOGIN
 router.post('/login', async (req, res) => {
+    
     try {
         const user = await User.findOne({ username: req.body.username });
         if (!user) {

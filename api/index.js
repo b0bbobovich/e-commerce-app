@@ -15,14 +15,11 @@ const app = express();
 dotenv.config();
 
 
-const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3001", "https://boboshop.onrender.com", "https://boboshop-admin.onrender.com"],
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: ["Authorization", "Content-Type"]
-}
+// const corsOptions = {
+//     origin: ["http://localhost:3001", "http://localhost:3001", "https://boboshop.onrender.com", "https://boboshop-admin.onrender.com"],
+// }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 mongoose
@@ -42,6 +39,7 @@ app.use('/api/v1/users', userRoute);
 app.use('/api/v1/products', productRoute);
 app.use('/api/v1/cart', cartRoute);
 app.use('/api/v1/orders', ordersRoute);
+
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('Server is running!');
