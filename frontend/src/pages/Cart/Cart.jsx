@@ -54,7 +54,7 @@ const Cart = () => {
                             
                             <Product key={product._id}>
                                 <ProductDetail>
-                                    <Image src={product.img} />
+                                    <Image src={product.colors.find(item => item.color === product.color).images[1]} />
                                     <Details>
                                         <ProductName>
                                             <b>Product: </b>

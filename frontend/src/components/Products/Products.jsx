@@ -81,17 +81,16 @@ const Products = ({ category, filters, sort }) => {
             </PreloaderContainer>   
         )
     }
-
     return ( 
         <Container>        
-            {filters
-            ?   filteredProducts.map(item => (
-                <Product item={item} key={item._id} />
+            {filters && Object.keys(filters).length > 0
+            ?   filteredProducts.map(product => (
+                <Product product={product} color={filters.colors} key={product._id} />
             )) 
             : products
                 .slice(0, 8)
-                .map(item => (
-                    <Product item={item} key={item._id} />
+                .map(product => (
+                    <Product product={product} key={product._id} />
             ))
             }       
         </Container>

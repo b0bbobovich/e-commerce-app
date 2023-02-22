@@ -10,12 +10,17 @@ import {
 } from "./Product.styled";
 
 
-const Product = ({ item }) => {
-
+const Product = ({ product, color="default" }) => {
     return (
-        <Container>
+        <Container >
             <Circle />
-            <Image src={item.colors[0].images[1]} />
+            {color !== "default"
+                ? <Image src={product.colors.find(item => item.color
+                    .split(/,| /)
+                    .includes(color)
+                )?.images[1]} />
+                : <Image src={product.colors[0].images[1]} />
+            }
             <Info>
                 <Icon>
                     <ShoppingCartOutlined/>  
@@ -24,7 +29,7 @@ const Product = ({ item }) => {
                     <FavoriteBorderOutlined/>  
                 </Icon>
                 <Icon>
-                    <Link to={`/product/${item._id}`} style={{color: "black"}}>
+                    <Link to={`/product/${product._id}`} style={{color: "black"}}>
                         <SearchOutlined />  
                     </Link>
                 </Icon>

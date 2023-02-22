@@ -74,12 +74,7 @@ export const ProductName = styled.span``;
 
 export const ProductId = styled.span``;
 
-export const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props=>props.color};
-`;
+export const ProductColor = styled.span``;
 
 export const ProductSize = styled.span``;
 
