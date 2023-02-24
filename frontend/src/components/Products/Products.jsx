@@ -83,7 +83,7 @@ const Products = ({ category, filters, sort }) => {
     }
     return ( 
         <Container>        
-            {filters && Object.keys(filters).length > 0
+            {filters 
             ?   filteredProducts.map(product => (
                 <Product product={product} color={filters.colors} key={product._id} />
             )) 

@@ -66,7 +66,6 @@ const Register = () => {
         }
     };
 
-
     if (isRegisterSuccess) {
         return (
             <Navigate to="/login"/>
@@ -80,7 +79,6 @@ const Register = () => {
     //         </PreloaderContainer>
     //     )
     // };
-
 
     return (
         <Container>
@@ -119,7 +117,6 @@ const Register = () => {
                             <ErrorMessage>{existError}</ErrorMessage>
                             <LoginButton to="/login">Log in</LoginButton>
                         </>
-
                     }
                     <Agrrement>
                         By creating an account, I consent to the processing of my personal data in accordance with <b>PRIVACY POLICY</b>
