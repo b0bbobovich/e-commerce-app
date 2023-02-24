@@ -1,40 +1,37 @@
 import {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/apiCalls";
+import { login as loginFunc }  from "../../redux/userSlice.js";
 import {
     Container,
     Wrapper,
     Title,
     Form,
+    InputContainer,
     Input,
+    Label,
     Button,
-    Link,
-    Error
+    NavLink,
+    Error,
+    PreloaderContainer,
+    Preloader
 } from "./Login.styled";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
+    const [validationError, setValidationError] = useState(false);
     const dispatch = useDispatch();
     const { isFetching, error } = useSelector((state) => state.user); 
-
 
     const handleSignin = (event) => {
         const login = event.target.login.value;
         const password = event.target.password.value;
-        let isValid = false;
-
-        if (login.includes("@")) {
-            isValid = validateEmail(login);
-        }
-        else {
-            isValid = validateUsername(login);
-        }
-
-        event.preventDefault();
-        // dispatch(login({ login, password }));
-
+        let isValid = false; 
+        login.includes("@") ? isValid = validateEmail(login) : isValid = validateUsername(login);
+        isValid
+            ?
+            dispatch(loginFunc({ login, password }))
+            :
+            setValidationError(true);
+            event.preventDefault();
     }
 
     const validateEmail = (login) => {
@@ -52,12 +49,26 @@ const Login = () => {
         <Wrapper>
             <Title>SIGN IN</Title>
             <Form onSubmit={handleSignin}>
-                <Input placeholder="username or email" name="login" required type="text"></Input>
-                <Input placeholder="password" name="password" type="password"></Input>
-                <Button type="submit" disabled={isFetching}>LOGIN</Button>    
-                {error && <Error>Something went wrong...</Error>}
-                <Link>DON`T REMEMBER THE PASSWORD?</Link>
-                <Link>CREATE A NEW ACCOUNT</Link>
+                <InputContainer>
+                    <Input placeholder="username or email" id="login" name="login" required type="text" onKeyUp={() => setValidationError(false)} />
+                    <Label htmlFor="login">Username or Email</Label>
+                </InputContainer>
+                {validationError && <Error>Please use valid email or username!</Error>}    
+                <InputContainer>
+                    <Input id="password" placeholder="password" name="password" type="password" />
+                    <Label htmlFor="password">Password</Label>
+                </InputContainer>
+                {isFetching
+                    ?
+                    <PreloaderContainer>
+                        <Preloader src={process.env.PUBLIC_URL + "/preloaderLogo.svg"} />
+                    </PreloaderContainer>
+                    :
+                    <Button type="submit" disabled={isFetching}>LOGIN</Button>    
+                }
+                {error.status && <Error>{error.message}</Error>}
+                <NavLink>DON`T REMEMBER THE PASSWORD?</NavLink>
+                <NavLink to="/register">CREATE A NEW ACCOUNT</NavLink>
             </Form>
         </Wrapper>
     </Container>

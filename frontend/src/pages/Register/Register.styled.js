@@ -20,6 +20,7 @@ export const Wrapper = styled.div`
     width: 40%;
     padding: 20px;
     background-color: white;
+    border-radius: 15px;
     ${mobile({ width: "75%"})};
 `;
 
@@ -35,18 +36,17 @@ export const Form = styled.form`
 `;
 
 export const InputContainer = styled.div`
-    
     position: relative;
     flex: 1;
     min-width: 40%;
-    margin: 10px 10px 0 0;
-    padding: 10px;
+    margin: 10px 5px;
 `;
 
 export const Input = styled.input`
-    padding: 5px;
+    box-sizing: border-box;
+    padding: 10px;
     width: 100%;
-    height: 30px;
+    height: 40px;
     position: relative;
     border: 1px solid lightgray;
     background: none;
@@ -69,13 +69,13 @@ export const PasswordInput = styled(Input)`
     border: ${props => props.isMatched ? "1px solid lightgray" : "2px solid crimson"};
     &:focus {
         border: ${props => props.isMatched ? "2px solid teal" : "2px solid crimson"};
-        }
+    }
 `;
 
 export const Label = styled.label`
     position: absolute;
-    top: 22px;
-    left: 10px;
+    top: 10px;
+    left: 5px;
     z-index: 0;
     pointer-events: none;
     padding: 0 5px;
@@ -95,6 +95,7 @@ export const Label = styled.label`
     };
 `;
 
+
 export const ErrorMessage = styled.span`
     font-size: 14px;
     color: crimson;
@@ -107,6 +108,7 @@ export const Agrrement = styled.span`
 `;
 
 export const Button = styled.button`
+    margin: 0 auto;
     width: 40%;
     border: none;
     padding: 15px 20px;
@@ -116,8 +118,16 @@ export const Button = styled.button`
     border-radius: 5px; 
 `;
 
+export const ErrorContainter = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const LoginButton = styled(Link)`
-    margin: 10px auto;
+    margin: 10px auto 0 auto;
     text-decoration: none;
     color: white;
     background: teal;
@@ -126,7 +136,7 @@ export const LoginButton = styled(Link)`
 `;
 
 export const PreloaderContainer = styled.div`
-    margin-top: 50px;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
     align-items: center;

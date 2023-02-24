@@ -12,6 +12,7 @@ import {
     Button,
     ErrorMessage,
     LoginButton,
+    ErrorContainter,
     PreloaderContainer,
     Preloader
 } from "./Register.styled";
@@ -43,15 +44,14 @@ const Register = () => {
         try {
             await publicRequest.post("/auth/register/", data);
             setIsRegisterSuccess(true);
+            setIsFetching(false);
         }
         catch (err) {
-            console.log(err)
             if (err.response?.status === 520) {
-                setExistError(err.response.data)
-            }
-        }
-        finally {
+                setExistError(err.response.data);
+            };
             setIsFetching(false);
+            event.preventDefault();
         }
     };
 
@@ -72,14 +72,6 @@ const Register = () => {
         )
     };
 
-    // if (isFetching) {
-    //     return (
-    //         <PreloaderContainer>
-    //             <Preloader src={process.env.PUBLIC_URL + "/preloaderLogo.svg"} />
-    //         </PreloaderContainer>
-    //     )
-    // };
-
     return (
         <Container>
             <Wrapper>
@@ -99,29 +91,36 @@ const Register = () => {
                     </InputContainer>
                     <InputContainer>
                         <Input id="email" required placeholder="email" type="email" onKeyUp={() => setExistError(null)} ></Input>
-                        <Label htmlFor="email">Email</Label>    
+                        <Label htmlFor="email">Email</Label>
                     </InputContainer>
                     <InputContainer>
                         <PasswordInput isMatched={isPasswordsMatched} id="password" required placeholder="password" type="password" onKeyUp={confirmPasswords} autocomplete="off" />
                         <Label htmlFor="password">Password</Label>
                     </InputContainer>
                     <InputContainer>
-                        <PasswordInput isMatched={isPasswordsMatched} id="confirmPassword" required placeholder="confirm password" type="password" onKeyUp={confirmPasswords} autocomplete="off"/>
+                        <PasswordInput isMatched={isPasswordsMatched} id="confirmPassword" required placeholder="confirm password" type="password" onKeyUp={confirmPasswords} autocomplete="off" />
                         <Label htmlFor="confirm-password">Confirm password</Label>
                     </InputContainer>
-                    {!isPasswordsMatched && 
+                    {!isPasswordsMatched &&
                         <ErrorMessage>{"Passwords do NOT match!"}</ErrorMessage>
                     }
-                    {existError && 
-                        <>
+                    {existError &&
+                        <ErrorContainter>
                             <ErrorMessage>{existError}</ErrorMessage>
                             <LoginButton to="/login">Log in</LoginButton>
-                        </>
+                        </ErrorContainter>
                     }
                     <Agrrement>
                         By creating an account, I consent to the processing of my personal data in accordance with <b>PRIVACY POLICY</b>
                     </Agrrement>
-                    <Button type="submit" disabled={isFetching || !isPasswordsMatched}>CREATE</Button>
+                    {isFetching 
+                        ?
+                        <PreloaderContainer>
+                            <Preloader src={process.env.PUBLIC_URL + "/preloaderLogo.svg"} />
+                        </PreloaderContainer>
+                        :
+                        <Button type="submit" disabled={isFetching || !isPasswordsMatched}>CREATE</Button>
+                    }
                 </Form>
             </Wrapper>  
         </Container>
