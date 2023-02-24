@@ -108,7 +108,7 @@ export const Agrrement = styled.span`
 `;
 
 export const Button = styled.button`
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     width: 40%;
     border: none;
     padding: 15px 20px;
@@ -136,7 +136,7 @@ export const LoginButton = styled(Link)`
 `;
 
 export const PreloaderContainer = styled.div`
-    margin: 10px auto;
+    margin: 10px auto 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -90,7 +90,6 @@ export const Label = styled.label`
 `;
 
 export const Button = styled.button`
-
     width: 40%;
     border: none;
     padding: 15px 20px;
@@ -114,6 +113,7 @@ export const NavLink = styled(Link)`
 `;
 
 export const Error = styled.span`
+    margin: 5px 0 10px 0;
     color: red;
 `
 

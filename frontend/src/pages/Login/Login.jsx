@@ -58,6 +58,7 @@ const Login = () => {
                     <Input id="password" placeholder="password" name="password" type="password" />
                     <Label htmlFor="password">Password</Label>
                 </InputContainer>
+                {error.status && <Error>{error.message}</Error>}
                 {isFetching
                     ?
                     <PreloaderContainer>
@@ -66,7 +67,6 @@ const Login = () => {
                     :
                     <Button type="submit" disabled={isFetching}>LOGIN</Button>    
                 }
-                {error.status && <Error>{error.message}</Error>}
                 <NavLink>DON`T REMEMBER THE PASSWORD?</NavLink>
                 <NavLink to="/register">CREATE A NEW ACCOUNT</NavLink>
             </Form>
