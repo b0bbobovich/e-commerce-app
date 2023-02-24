@@ -33,12 +33,22 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     
     try {
-        const user = await User.findOne({ username: req.body.username });
+        let user = null;
+        if (req.body.login.includes("@")) {
+            user = await User.findOne({ email: req.body.login });
+        }
+        else if (!req.body.login.includes("@")) {
+            user = await User.findOne({ username: req.body.login });
+        }
+        else {
+            res.status(401).json("No email or username provided!")
+            return
+        }
         if (!user) {
             res.status(401).json('Wrong credentials!');
             return
         };
-
+        
         const hashedPassword = cryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
         const originalPassword = hashedPassword.toString(cryptoJS.enc.Utf8);
         if (originalPassword !== req.body.password) {
