@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
     const res = await publicRequest.post("/auth/login", user);
     return res.data
   }
-)
+);
 
 const userSlice = createSlice({
   name: "user",
