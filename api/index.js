@@ -12,17 +12,17 @@ const ordersRoute = require('./routes/orders');
 const app = express();
 dotenv.config();
 
-const corsOptions = {
-    origin: [
-        "https://bbshop.netlify.app",
-        "http://localhost:3001",
-        "http://localhost:3001",
-        "https://boboshop.onrender.com",
-        "https://boboshop-admin.onrender.com",
-    ],
-}
+// const corsOptions = {
+//     origin: [
+//         "https://bbshop.netlify.app",
+//         "http://localhost:3001",
+//         "http://localhost:3001",
+//         "https://boboshop.onrender.com",
+//         "https://boboshop-admin.onrender.com",
+//     ],
+// }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 mongoose
     .connect(process.env.MONGO_URL)
