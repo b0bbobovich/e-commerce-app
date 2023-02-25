@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const PROD_URL = "https://boboshop-api.onrender.com/api/v1";
+const PROD_URL = "https://bbshop-api.cyclic.app/v1";
 
-const DEV_URL = "http://localhost:5000/api/v1";
+const DEV_URL = "http://localhost:5000/v1";
 
 
 
