@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://boboshop-api.onrender.com/api/v1";
+const BASE_URL = "https://bbshop-api.cyclic.app/v1";
 
 
 export const publicRequest = axios.create({
