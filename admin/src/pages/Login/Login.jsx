@@ -1,41 +1,46 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/userSlice";
+import { login as loginFunc} from "../../redux/userSlice";
 import {Navigate} from "react-router-dom";
 import {
   Container,
   InputField,
-  LoginButton
+  LoginButton,
+  Form
 } from "./Login.styled";
 
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.currentUser)
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    dispatch(login({ username, password }));
+  const handleSubmit = (event) => {
+    const login = event.target.login.value;
+    const password = event.target.password.value;
+    dispatch(loginFunc({ login, password }));
+    event.preventDefault();
   };
 
   if (user == null) {
     return (
       <Container>
-        <InputField
-          type="text"
-          placeholder="username"
-          onChange={(e)=>setUsername(e.target.value)}
-        />
-        <InputField
-          type="password"
-          placeholder="password"
-          onChange={(e)=>setPassword(e.target.value)}
-        />
-        <LoginButton onClick={handleClick}>
-          Login
-        </LoginButton>
+        <Form onSubmit={handleSubmit}>
+          <InputField
+            required
+            name="login"
+            type="text"
+            placeholder="username or email"
+          />
+          <InputField
+            required
+            name="password"
+            type="password"
+            placeholder="password"
+          />
+          <LoginButton type="submit">
+            Login
+          </LoginButton>
+        </Form>
       </Container > 
     )
   }

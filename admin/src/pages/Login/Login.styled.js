@@ -8,6 +8,11 @@ export const Container = styled.div`
     justify-content: center
 `;
 
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const InputField = styled.input`
     padding: 10px;
     margin-bottom: 20px
