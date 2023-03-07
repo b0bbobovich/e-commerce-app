@@ -25,13 +25,12 @@ router.post('/register', async (req, res) => {
         }
     }
     else {
-        res.status(420).json('Please fill in all fields!')
+        res.status(500);
     }
 })
 
 // LOGIN
 router.post('/login', async (req, res) => {
-    
     try {
         let user = null;
         if (req.body.login.includes("@")) {
@@ -45,7 +44,7 @@ router.post('/login', async (req, res) => {
             return
         }
         if (!user) {
-            res.status(401).json('Wrong credentials!');
+            res.status(403).json('Wrong credentials!');
             return
         };
         
