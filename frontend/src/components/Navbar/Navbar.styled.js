@@ -2,22 +2,32 @@ import styled, { css } from "styled-components";
 import { mobile } from '../../responsive';
 import { Link } from "react-router-dom";
 import { Search, ShoppingCartOutlined, ExitToApp } from "@material-ui/icons";
+import {Logout, Login} from '@mui/icons-material';
 
 const Icon = css`
     fontSize: 16px;
     cursor: pointer;
+    margin-right: 5px;
 `;
 
 export const SearchIcon = styled(Search)`
-    ${Icon}
+    ${Icon};
 `;
 
 export const CartIcon = styled(ShoppingCartOutlined)`
-    ${Icon}
+    ${Icon};
 `;
 
-export const ExitIcon = styled(ExitToApp)`
-    ${Icon}
+export const RegisterIcon = styled(ExitToApp)`
+    ${Icon};
+`;
+
+export const LoginIcon = styled(Login)`
+    ${Icon};
+`;
+
+export const LogoutIcon = styled(Logout)`
+    ${Icon};
 `;
 
 export const NavLink = styled(Link)`
@@ -89,7 +99,14 @@ export const Right = styled.div`
 
 export const MenuItem = styled.div`
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     margin-left: 25px;
-    ${mobile({fontSize: "12px", marginLeft: "10px"})};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+    &:active {
+        color: teal;
+    }
 `;

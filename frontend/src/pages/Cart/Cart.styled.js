@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div``;
 
@@ -22,9 +23,14 @@ export const Top = styled.div`
 
 export const TopButton = styled.button`
     padding: 10px;
-    font-weight: 600;
     cursor: pointer;
     background-color: transparent;
+`;
+
+export const NavLink = styled(Link)`
+    font-weight: 600;
+    color: black;
+    text-decoration: none;
 `;
 
 export const TopTextContainer = styled.div`

@@ -5,7 +5,7 @@ import Newsletter from "../../components/Newsletter/Newsletter";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../../requestsMethods";
 import { addProduct } from "../../redux/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Container,
     Wrapper,
@@ -32,30 +32,33 @@ import {
     Preloader
 } from "./Product.styled";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-
+import { openLoginDialog } from "../../redux/modalSlice";
 
 const Product = () => {
+    const { currentUser } = useSelector((state) => state.user); 
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
     const [images, setImages] = useState(["/noImage.png"]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [slideIndex, setSlideIndex] = useState(0);
     const location = useLocation();
     const dispatch = useDispatch();
     const id = location.pathname.split("/")[2];
+    
 
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     
     useEffect(() => {
-        setIsLoading(true);
+
         const getProduct = async () => {
             try {
                 const res = await publicRequest.get("/products/find/" + id);
                 setProduct(res.data);
+                console.log("res.data", res.data)
                 setSize(res.data.sizes[0]);
                 if (res.data.colors.length > 0) {
                     setColor(res.data.colors[0].color);
@@ -63,10 +66,10 @@ const Product = () => {
                 }
             }
             catch (err) {
-                console.error(err);
+                console.error(err)
             }
             finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
         };
         getProduct();
@@ -90,11 +93,16 @@ const Product = () => {
         setSlideIndex(0);
     };
 
-    const handleAddToCart = () => {
-        dispatch(addProduct({ ...product, quantity, color, size }));
+    const handleAddToCart = async () => {
+        if (!currentUser) {
+            dispatch(openLoginDialog());
+        }
+        else {
+            dispatch(addProduct({ userId: currentUser._id , productId: product._id, quantity, color, size}));
+        }
     };
 
-    const handleClick = (direction) => {
+    const handleNextSlide = (direction) => {
         const lastIndex = images.length - 1;
         if (direction === "left") {
             setSlideIndex(slideIndex > 0 ? slideIndex - 1 : lastIndex)
@@ -116,7 +124,7 @@ const Product = () => {
         <Container>
             <Wrapper>
                 <SliderContainer>
-                    <Arrow direction="left" onClick={()=>handleClick("left")}>
+                    <Arrow direction="left" onClick={()=>handleNextSlide("left")}>
                         <ArrowLeftOutlined/>
                     </Arrow>
                     <SlideWrapper displacement={`-${slideIndex * (100 / images.length)}%`} width={`${images.length * 100}%`}>
@@ -128,7 +136,7 @@ const Product = () => {
                             </Slide>
                         )}
                     </SlideWrapper>
-                    <Arrow direction="right" onClick={()=>handleClick("right")}>
+                    <Arrow direction="right" onClick={()=>handleNextSlide("right")}>
                         <ArrowRightOutlined/>
                     </Arrow>
                 </SliderContainer>
@@ -171,7 +179,6 @@ const Product = () => {
             </Wrapper>
             <Newsletter />
             <Footer />
-            
         </Container>
     )
     

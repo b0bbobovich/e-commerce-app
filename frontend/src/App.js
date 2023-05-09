@@ -1,21 +1,41 @@
 import Home from './pages/Home/Home';
 import Product from './pages/Product/Product';
 import ProductList from './pages/ProductList/ProductList';
-import Register from './pages/Register/Register';
-import Login from './pages/Login/Login';
 import Cart from './pages/Cart/Cart';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import Checkout from './pages/Checkout/Checkout';
+import LoginDialog from './components/LoginDialog/LoginDialog';
+import RegisterDialog from './components/RegisterDialog/RegisterDialog';
 import {
   Routes,
-  Route,
-  Navigate
+  Route
 } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { closeLoginDialog, closeRegisterDialog } from "./redux/modalSlice";
 
 
 function App() {
-  const user = useSelector(state => state.user.currentUser);
+  const modal = useSelector(state => state.modal);
+  const {currentUser} = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  if (modal.isLoginDialogOpen) {
+    return (
+      <LoginDialog 
+        open={modal.isLoginDialogOpen}
+        onClose={() => dispatch(closeLoginDialog())}
+      />
+    )
+  }
+
+  if (modal.isRegisterDialogOpen) {
+    return (
+      <RegisterDialog 
+        open={modal.isRegisterDialogOpen}
+        onClose={() => dispatch(closeRegisterDialog())}
+      />
+    )
+  }
 
   return (
       <Routes>
@@ -27,8 +47,6 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout/>} />
         </Route>
-        <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>}/>
-        <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}/> 
       </Routes>
   );
 }

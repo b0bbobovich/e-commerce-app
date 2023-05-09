@@ -3,16 +3,26 @@ import { publicRequest, userRequest } from "../requestsMethods";
 
 export const login = createAsyncThunk(
     "user/login",
-    async (user, { rejectWithValue }) => {
+    async (user, {rejectWithValue}) => {
         try {
             const res = await publicRequest.post("/auth/login", user);
-            return res.data 
+            return res
         }
         catch (err) {
-            if (!err.response) {
-                throw err
-            }
-            return rejectWithValue(err.response.data)
+            return err.response ? rejectWithValue(err.response.data) : rejectWithValue(err.message)
+        }
+    }
+);
+
+export const register = createAsyncThunk(
+    "user/register",
+    async (userData, {rejectWithValue}) => {
+        try {
+            const res = await publicRequest.post("/auth/register", userData);
+            return res
+        }
+        catch (err) {
+            return err.response ? rejectWithValue(err.response.data) : rejectWithValue(err.message)
         }
     }
 );
@@ -22,10 +32,6 @@ const userSlice = createSlice({
     initialState: {
         currentUser: null,
         isFetching: false,
-        error: {
-            status: false,
-            message: ""
-        }
     },
     reducers: {
         logout: (state) => {
@@ -36,20 +42,25 @@ const userSlice = createSlice({
         builder
             .addCase(login.pending, (state) => {
                 state.isFetching = true;
-                state.error.status = false;
-                state.error.message = "";
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.isFetching = false;
-                state.currentUser = action.payload;
+                state.currentUser = action.payload.data;
             })
             .addCase(login.rejected, (state, action) => {
                 state.isFetching = false;
-                state.error.message = action.payload;
-                state.error.status = true;
+            })
+            .addCase(register.pending, (state) => {
+                state.isFetching = true;
+            })
+            .addCase(register.fulfilled, (state, action) => {
+                state.isFetching = false;
+            })
+            .addCase(register.rejected, (state, action) => {
+                state.isFetching = false;
             })
       }
 })
 
-export const { loginStart, loginSuccess, loginFailure, logout } = userSlice.actions;
+export const {logout} = userSlice.actions;
 export default userSlice.reducer;

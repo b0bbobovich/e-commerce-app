@@ -1,4 +1,3 @@
-import { Search, ShoppingCartOutlined, ExitToApp } from "@material-ui/icons";
 import React from "react";
 import Badge from '@material-ui/core/Badge';
 import {useDispatch, useSelector} from "react-redux";
@@ -17,9 +16,12 @@ import {
     MenuItem,
     SearchIcon,
     CartIcon,
-    ExitIcon
+    LoginIcon,
+    LogoutIcon,
+    RegisterIcon,
 } from "./Navbar.styled";
 import { logout } from "../../redux/userSlice";
+import { openRegisterDialog as showRegisterForm, openLoginDialog as showLoginForm } from "../../redux/modalSlice";
 
 
 const Navbar = () => {
@@ -29,6 +31,14 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
+    };
+
+    const openRegisterDialog = () => {
+        dispatch(showRegisterForm());
+    };
+
+    const openLoginDialog = () => {
+        dispatch(showLoginForm());
     };
 
     return (
@@ -55,22 +65,31 @@ const Navbar = () => {
                     {!user
                         ?
                         <>
-                            <NavLink to="/register">
-                                <MenuItem >REGISTER</MenuItem>
-                            </NavLink>
-                            <NavLink to="/login">
-                                <MenuItem>SIGN IN</MenuItem>
+                            <MenuItem onClick={openRegisterDialog}>
+                                <RegisterIcon />
+                                REGISTER
+                            </MenuItem>
+                            <MenuItem onClick={openLoginDialog}>
+                                <LoginIcon />
+                                SIGN IN
+                            </MenuItem>
+                        </>
+                        :
+                        <>
+                            <MenuItem onClick={handleLogout}>
+                                <LogoutIcon />
+                                LOGOUT
+                            </MenuItem>
+                            <NavLink to="/cart">
+                                <MenuItem>
+                                    <Badge badgeContent={quantity} overlap="rectangular" color="primary">
+                                        <CartIcon />
+                                    </Badge>
+                                    CART
+                                </MenuItem>
                             </NavLink>
                         </>
-                        : <ExitIcon onClick={handleLogout} />
                     }
-                    <NavLink to="/cart">
-                        <MenuItem>
-                            <Badge badgeContent={quantity} overlap="rectangular" color="primary">
-                                <CartIcon />
-                            </Badge>
-                        </MenuItem>
-                    </NavLink>
                 </Right>
             </Wrapper>
         </Container>

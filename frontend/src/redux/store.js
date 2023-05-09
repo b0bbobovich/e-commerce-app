@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"; 
 import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
+import modalReducer from "./modalSlice";
 import {
     persistReducer,
     persistStore,
@@ -19,7 +20,7 @@ const persistConfig = {
     storage
 }
 
-const appReducer = combineReducers({ user: userReducer, cart: cartReducer });
+const appReducer = combineReducers({ user: userReducer, cart: cartReducer, modal: modalReducer });
 
 const rootReducer = (state, action) => {
     if (action.type === 'user/logout') {

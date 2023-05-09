@@ -1,23 +1,16 @@
 import { Link } from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 import { mobile } from "../../responsive";
+import { Dialog } from "@material-ui/core";
 
-export const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(
-        rgba(255,255,255,0.5), 
-        rgba(255,255,255,0.5)
-        ),
-        url("https://i.ibb.co/pyGy0cS/pexels-photo-6984650.jpg") center no-repeat;
-    background-size: cover;
+export const Container = styled(Dialog)`
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
-export const Wrapper = styled.div`
-    width: 40%;
+export const Wrapper = styled.div` 
+    width: 500px;
     padding: 20px;
     background-color: white;
     border-radius: 15px;
@@ -120,19 +113,28 @@ export const Button = styled.button`
 
 export const ErrorContainter = styled.div`
     width: 100%;
+    heigth: 50px;
+    background-color: whitesmoke;
+    padding: 5px;
+    border-radius: 5px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 `;
 
 export const LoginButton = styled(Link)`
-    margin: 10px auto 0 auto;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
     text-decoration: none;
     color: white;
     background: teal;
     padding: 10px;
     border-radius: 5px; 
+    border: none;
+    cursor: pointer;
 `;
 
 export const PreloaderContainer = styled.div`

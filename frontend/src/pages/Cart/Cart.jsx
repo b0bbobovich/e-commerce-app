@@ -3,13 +3,15 @@ import Footer from "../../components/Footer/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { userRequest } from "../../requestsMethods";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartSlice";
 import {
     Container,
     Wrapper,
     Title,
     Top,
     TopButton,
+    NavLink,
     TopTextContainer,
     TopText,
     Bottom,
@@ -35,15 +37,28 @@ import {
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);
+    const quantity = useSelector(state => state.cart.quantity);
+    const dispatch = useDispatch();
+    
+    const handleChooseQuantity = (type) => {
+        // if (type === "dec") {
+        //     quantity > 1 && dispatch(addProduct({ ...product, quantity, color, size }));
+        // }
+        // else {
+        //     setQuantity(quantity + 1);
+        // }
+    };
  
     return (
         <Container>
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
+                    <TopButton>
+                        <NavLink to="/products">CONTINUE SHOPPING</NavLink>
+                    </TopButton>
                     <TopTextContainer>
-                        <TopText>Shopping Bag (2)</TopText>
+                        <TopText>Shopping Bag ({quantity})</TopText>
                         <TopText>Your Wishlist (0)</TopText>
                     </TopTextContainer>
 
@@ -76,11 +91,11 @@ const Cart = () => {
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmountContainer>
-                                        <Add />
+                                        <Add onClick={() => handleChooseQuantity("dec")} />
                                         <ProductAmount>
                                             {product.quantity}
                                         </ProductAmount>
-                                        <Remove />
+                                        <Remove onClick={() => handleChooseQuantity("dec")}/>
                                     </ProductAmountContainer>
                                     <ProductPrice>
                                         $ {product.price * product.quantity}

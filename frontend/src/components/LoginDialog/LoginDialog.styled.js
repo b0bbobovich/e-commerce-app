@@ -1,28 +1,24 @@
 import styled, {keyframes} from "styled-components";
 import { mobile } from "../../responsive";
 import { Link } from "react-router-dom";
+import { Dialog } from '@mui/material';
 
 
-export const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(
-        rgba(255,255,255,0.5), 
-        rgba(255,255,255,0.5)
-        ),
-        url("https://i.ibb.co/3zY5md1/pexels-photo-6984650.jpg") center no-repeat;
-    background-size: cover;
+export const Container = styled(Dialog)`
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
 export const Wrapper = styled.div`
-    width: 25%;
-    padding: 20px;
     background-color: white;
     border-radius: 15px;
     ${mobile({ width: "75%"})};
+`;
+
+export const Content = styled.div`
+    width: 280px;
+    margin: 20px;
 `;
 
 export const Title = styled.h1`
@@ -110,10 +106,14 @@ export const NavLink = styled(Link)`
     text-decoration: underline;
     color: black;
     cursor: pointer;
+    &:active {
+        color: teal;
+    }
 `;
 
 export const Error = styled.span`
-    margin: 5px 0 10px 0;
+    max-width: 100%;
+    margin: 5px auto 10px auto;
     color: red;
 `
 

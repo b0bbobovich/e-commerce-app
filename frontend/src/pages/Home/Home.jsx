@@ -8,7 +8,7 @@ import { Container } from "./Home.styled";
 const Home = () => {
     
     return (      
-        <Container>
+        <Container id="test">
             <Slider />
             <Categories />
             <Products />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 import { mobile } from "../../responsive";
 
@@ -148,6 +149,7 @@ export const Button = styled.button`
         background-color: #f8f4f4;
     }
 `;
+
 
 export const PreloaderContainer = styled.div`
     margin-top: 200px;
