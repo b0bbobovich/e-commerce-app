@@ -1,5 +1,8 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const User = require('../models/User');
+const Cart = require('../models/Cart');
+const OrdersList = require('../models/OrdersList');
 const jwt = require('jsonwebtoken');
 const cryptoJS = require('crypto-js');
 const {verifyToken} = require('./verifyToken')
@@ -18,6 +21,10 @@ router.post('/register', async (req, res) => {
 
         try {
             const savedUser = await newUser.save();
+            const userCart = new Cart({ _id: mongoose.Types.ObjectId(savedUser._id) }); 
+            const userOrders = new OrdersList({ _id: mongoose.Types.ObjectId(savedUser._id) });
+            await userCart.save();
+            await userOrders.save();
             res.status(201).json(savedUser);
         }
         catch (err) {
@@ -25,7 +32,7 @@ router.post('/register', async (req, res) => {
         }
     }
     else {
-        res.status(500);
+        res.status(500).json("Ooops...Something goes wrong!");
     }
 })
 

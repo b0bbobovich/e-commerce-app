@@ -27,7 +27,7 @@ app.use(cors());
 mongoose
     .connect(process.env.MONGO_URL)
     .then(() => {
-        console.log('DB Connection Successfull!');
+        console.log('\x1b[32m%s\x1b[0m', 'DB Connection Successfull!');
     })
     .catch((err) => {
         console.log(err);
@@ -42,5 +42,5 @@ app.use('/v1/orders', ordersRoute);
 
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log('Server is running!');
+    console.log('\x1b[32m%s\x1b[0m', 'Server is running!');
 });

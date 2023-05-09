@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
         })
     }
     else {
-        console.log(res)
+        // console.log(res)
         return res.status(401).json('You are not authenticated!');
     }
 }
@@ -28,7 +28,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
             next();
         }
         else {
-            console.log('You are not allowed to do that!')
+            // console.log('You are not allowed to do that!')
             res.status(403).json('You are not allowed to do that!');
         }
     });

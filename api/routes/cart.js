@@ -1,41 +1,30 @@
 const router = require('express').Router();
+const { default: mongoose } = require('mongoose');
 const Cart = require('../models/Cart');
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verifyToken');
 
-
-// CREATE CART
-router.post('/:id', verifyTokenAndAuthorization, async (req, res) => {
-    const newCart = new Cart({ _id: req.params.id, products: req.body.products });
-    try {
-        const savedCart = await newCart.save();
-        res.status(200).json(savedCart);
-    }
-    catch (err) {
-        res.status(500).json(err);
-    }
-});
-
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verifyToken');
 
 // UPDATE CART
-router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
+router.patch('/:id', verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const updatedCart = await Cart.findByIdAndUpdate(req.params.id, {
-            $set: req.body,
-        }, { new: true })
-        res.status(200).json(updatedCart);
+        const newCartItem = {
+            // creating id manually, because we sending this object as response below
+            // and there is no need to find this object with automatically creating id after updating DB
+            _id: new mongoose.Types.ObjectId(),
+            productId: req.body.productId,
+            color: req.body.color,
+            size: req.body.size,
+            quantity: req.body.quantity
+        };
+        await Cart.updateOne({ _id: req.params.id }, {
+            $push: {
+                products: newCartItem
+            },
+        });
+        res.status(200).json(newCartItem);
     }
     catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// DELETE CART
-router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
-    try {
-        await Cart.findByIdAndDelete(req.params.id);
-        res.status(200).json('Cart has been deleted...');
-    }
-    catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });
@@ -61,6 +50,5 @@ router.get('/', verifyTokenAndAdmin, async (req, res) => {
         res.status(500).json(err);
     }
 })
-
 
 module.exports = router

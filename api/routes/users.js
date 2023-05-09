@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const cryptoJS = require('crypto-js');
 const User = require('../models/User');
+const Cart = require('../models/Cart');
+const OrdersList = require('../models/OrdersList');
 const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verifyToken');
 
 // UPDATE USER
@@ -23,6 +25,8 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
 router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
+        await Cart.findByIdAndDelete(req.params.id);
+        await OrdersList.findByIdAndDelete(req.params.id);
         res.status(200).json('User has been deleted...');
     }
     catch (err) {

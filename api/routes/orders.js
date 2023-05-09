@@ -1,31 +1,31 @@
 const router = require('express').Router();
-const Order = require('../models/Order');
+const OrdersList = require('../models/OrdersList');
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verifyToken');
 var crypto = require('crypto');
 var sha1 = crypto.createHash('sha1');
 
-// CREATE ORDER
-router.post('/:id', verifyTokenAndAuthorization, async (req, res) => {
-    const newOrder = new Order(req.body);
-    try {
-        const savedOrder = await newOrder.save();
+// // CREATE ORDER
+// router.post('/:id', verifyTokenAndAuthorization, async (req, res) => {
+//     const newOrder = new Order(req.body);
+//     try {
+//         const savedOrder = await newOrder.save();
 
-        const liqpayData = prepareLiqpayData(savedOrder);
-        const liqpaySignature = prepareLiqpaySignature(liqpayData);
+//         const liqpayData = prepareLiqpayData(savedOrder);
+//         const liqpaySignature = prepareLiqpaySignature(liqpayData);
 
-        const liqpayParams = {
-            // orderId: savedOrder._id,
-            data: liqpayData,
-            signature: liqpaySignature
-        }
-        res.status(200).json(liqpayParams);
-    }
-    catch (err) {
-        res.status(500).json(err);
-        console.error(err)
+//         const liqpayParams = {
+//             // orderId: savedOrder._id,
+//             data: liqpayData,
+//             signature: liqpaySignature
+//         }
+//         res.status(200).json(liqpayParams);
+//     }
+//     catch (err) {
+//         res.status(500).json(err);
+//         console.error(err)
         
-    }
-});
+//     }
+// });
 
 const prepareLiqpayData = (order) => {
 
@@ -58,17 +58,6 @@ router.put('/:orderId', verifyTokenAndAdmin, async (req, res) => {
             $set: req.body,
         }, { new: true })
         res.status(200).json(updatedOrder);
-    }
-    catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// DELETE CART
-router.delete('/:orderId', verifyTokenAndAdmin, async (req, res) => {
-    try {
-        await Order.findByIdAndDelete(req.params.orderId);
-        res.status(200).json('Order has been deleted...');
     }
     catch (err) {
         res.status(500).json(err);

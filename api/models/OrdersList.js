@@ -1,21 +1,27 @@
 const mongoose = require('mongoose');
 
-const CartSchema = new mongoose.Schema(
+const OrdersListSchema = new mongoose.Schema(
     {
         _id: {
             type: mongoose.Schema.Types.ObjectId,
             required: true
         },
+        amount: {
+            type: Number,
+        },
+        status: {
+            type: String,
+        },
+        contact: {
+            type: Object,
+        },
+        address: {
+            type: Object,
+        },
         products: [
-            {   
-                _id: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    required: true,
-                    unique: true
-                },
+            {
                 productId: {
-                    type: String,
-                    required: true
+                    type: String
                 },
                 color: {
                     type: String
@@ -27,10 +33,10 @@ const CartSchema = new mongoose.Schema(
                     type: Number,
                     default: 1
                 }
-            },
+            }
         ]
     },
     { timestamps: true }
 )
 
-module.exports = mongoose.model('Cart', CartSchema)
+module.exports = mongoose.model('OrdersList', OrdersListSchema)
