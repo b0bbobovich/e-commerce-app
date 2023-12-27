@@ -117,7 +117,7 @@ const FeaturedInfo = () => {
     let lastMonth = null;
 
     switch (selectedFilter) {
-      case "Today":
+      default:
         const today = currentDate;
         [totalOrders, totalRevenue] = getDayData(today);
         break;
@@ -155,7 +155,7 @@ const FeaturedInfo = () => {
     let lastDay = null;
 
     switch (timeRange) {
-      case "Today":
+      default:
         const yesterday = new Date(new Date().setDate(currentDate.getDate() - 1));
         [compareOrders, compareRevenue] = getDayData(yesterday);
         break;

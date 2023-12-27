@@ -82,10 +82,14 @@ const Navbar = () => {
                             </MenuItem>
                             <NavLink to="/cart">
                                 <MenuItem>
-                                    <Badge badgeContent={quantity} overlap="rectangular" color="primary">
+                                    <Badge
+                                        badgeContent={quantity}
+                                        overlap="rectangular"
+                                        color="primary"
+                                        anchorOrigin={{ vertical: "top", horizontal: "right", }}
+                                    >
                                         <CartIcon />
-                                    </Badge>
-                                    CART
+                                    </Badge>                                
                                 </MenuItem>
                             </NavLink>
                         </>

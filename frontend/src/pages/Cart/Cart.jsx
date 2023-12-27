@@ -1,10 +1,7 @@
-import React from "react";
-import Footer from "../../components/Footer/Footer";
-import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import React, {useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/cartSlice";
+import {useSelector, useDispatch } from "react-redux";
+import { openLoginDialog } from "../../redux/modalSlice";
 import {
     Container,
     Wrapper,
@@ -17,15 +14,14 @@ import {
     Bottom,
     Info,
     Product,
-    ProductDetail,
+    ClearButton,
     Image,
     Details,
     ProductName,
-    ProductId,
     ProductColor,
     ProductSize,
     PriceDetail,
-    ProductAmountContainer,
+    ProductOptions,
     ProductAmount,
     ProductPrice,
     Summary,
@@ -34,20 +30,20 @@ import {
     SummaryItemText,
     SummaryButton,
 } from "./Cart.styled";
+import Footer from "../../components/Footer/Footer";
+
 
 const Cart = () => {
+    const {currentUser} = useSelector(state => state.user);
     const cart = useSelector(state => state.cart);
     const quantity = useSelector(state => state.cart.quantity);
     const dispatch = useDispatch();
-    
-    const handleChooseQuantity = (type) => {
-        // if (type === "dec") {
-        //     quantity > 1 && dispatch(addProduct({ ...product, quantity, color, size }));
-        // }
-        // else {
-        //     setQuantity(quantity + 1);
-        // }
-    };
+
+    useEffect(() => {
+        if (!currentUser) {
+            dispatch(openLoginDialog());
+        }
+    }, [dispatch, currentUser]);
  
     return (
         <Container>
@@ -65,42 +61,35 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        {cart.products.map(product => (
-                            
-                            <Product key={product._id}>
-                                <ProductDetail>
-                                    <Image src={product.colors.find(item => item.color === product.color).images[1]} />
-                                    <Details>
-                                        <ProductName>
-                                            <b>Product: </b>
-                                            {product.title}
-                                        </ProductName>
-                                        <ProductId>
-                                            <b>ID: </b>
-                                            {product._id}
-                                        </ProductId>
+                        {cart.items.map((cartItem, index) => (
+                            <Product key={index}>
+                                <Image src={cartItem.product.colors.find(variation => variation.color === cartItem.color).images[1]} />
+                                <Details> 
+                                    <ProductName>
+                                        <b>Product: </b>
+                                        {cartItem.product.title}
+                                    </ProductName>
+                                    <ProductOptions>
                                         <ProductColor>
                                             <b>Color: </b>
-                                            {product.color}
+                                            {cartItem.color}
                                         </ProductColor>
                                         <ProductSize>
                                             <b>Size: </b>
-                                            {product.size}
+                                            {cartItem.size}
                                         </ProductSize>
-                                    </Details>
-                                </ProductDetail>
-                                <PriceDetail>
-                                    <ProductAmountContainer>
-                                        <Add onClick={() => handleChooseQuantity("dec")} />
+                                    </ProductOptions>
+                                    <PriceDetail>
                                         <ProductAmount>
-                                            {product.quantity}
+                                            <b>Quantity: </b>
+                                            {cartItem.quantity}
                                         </ProductAmount>
-                                        <Remove onClick={() => handleChooseQuantity("dec")}/>
-                                    </ProductAmountContainer>
-                                    <ProductPrice>
-                                        $ {product.price * product.quantity}
-                                    </ProductPrice>
-                                </PriceDetail>
+                                        <ProductPrice>
+                                            $ {cartItem.price}
+                                        </ProductPrice>
+                                    </PriceDetail>
+                                </Details>
+                                <ClearButton />
                         </Product>
                         ))}
                         

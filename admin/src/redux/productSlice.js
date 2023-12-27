@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://boboshop-api.onrender.com/api/v1',
+  // baseUrl: 'https://boboshop-api.onrender.com/api/v1',
+  baseUrl: "http://localhost:5000/v1",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().user.currentUser.accessToken;
-    console.log("token: ",token)
+    // console.log("token: ",token)
     if (token) {
       headers.set('token', `Bearer ${token}`);
     }

@@ -11,12 +11,11 @@ import {
   Route
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { closeLoginDialog, closeRegisterDialog } from "./redux/modalSlice";
+import { closeLoginDialog, closeRegisterDialog, openLoginDialog } from "./redux/modalSlice";
 
 
 function App() {
   const modal = useSelector(state => state.modal);
-  const {currentUser} = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   if (modal.isLoginDialogOpen) {
@@ -44,7 +43,7 @@ function App() {
           <Route path="products" element={<ProductList />} />
           <Route path="products/:category" element={<ProductList />} />
           <Route path="product/:id" element={<Product/>}/> 
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<Cart/>} />
           <Route path="checkout" element={<Checkout/>} />
         </Route>
       </Routes>

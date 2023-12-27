@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 import { Link } from "react-router-dom";
+import { Clear } from "@material-ui/icons";
+
 
 export const Container = styled.div``;
 
@@ -55,20 +57,26 @@ export const Info = styled.div`
 
 export const Product = styled.div`
     display: flex;
+    height: 200px;
     justify-content: space-between;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    margin: 0 20px 20px 0;
     ${mobile({ flexDirection: "column"})};
 `;
 
-export const ProductDetail = styled.div`
-    flex: 2;
-    display: flex;    
+export const ClearButton = styled(Clear)`
+    margin: 10px;
+    cursor: pointer;
 `;
 
 export const Image = styled.img`
     width: 200px;
+    object-fit: contain;
 `;
 
 export const Details = styled.div`
+    width: 100%;
     padding: 20px; 
     display: flex;
     flex-direction: column;
@@ -76,41 +84,31 @@ export const Details = styled.div`
     ${mobile({ })};
 `;
 
-export const ProductName = styled.span``;
+export const ProductOptions = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
 
-export const ProductId = styled.span``;
+export const ProductName = styled.span``;
 
 export const ProductColor = styled.span``;
 
 export const ProductSize = styled.span``;
 
+export const ProductAmount = styled.span`
+`;
+
+export const ProductPrice = styled.span`
+    font-size: 30px;
+    font-weight: 300;
+`;
 
 export const PriceDetail = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
-export const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
 `;
-
-export const ProductAmount = styled.div`
-    font-size: 24px;
-    margin: 5px;
-    ${mobile({ margin: "5px 15px"})};
-`;
-
-export const ProductPrice = styled.div`
-    font-size: 30px;
-    font-weight: 200;
-    ${mobile({ marginBottom: "20px"})};
-`;
-
 
 export const Summary = styled.div`
     flex: 1;
@@ -118,7 +116,6 @@ export const Summary = styled.div`
     border-radius: 10px;
     padding: 20px;
     height: max-content;
-
 `;
 
 export const SummaryTitle = styled.h1`
