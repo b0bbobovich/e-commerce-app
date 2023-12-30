@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import { useLocation } from 'react-router-dom';
 import { publicRequest } from '../../requestsMethods';
-import { addProduct } from '../../redux/cartSlice';
+import { updateCart } from '../../redux/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
@@ -91,11 +91,11 @@ const Product = () => {
       dispatch(openLoginDialog());
     } else {
       dispatch(
-        addProduct({
+        updateCart({
           userId: currentUser._id,
-          productId: product._id,
           totalPrice: quantity * product.price,
           image: images[1],
+          product,
           quantity,
           color,
           size,
