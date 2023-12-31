@@ -33,6 +33,8 @@ import {
   Amount,
   Select,
   Option,
+  Preloader,
+  PreloaderContainer,
 } from './Cart.styled';
 import { Add, Remove } from '@material-ui/icons';
 import Footer from '../../components/Footer/Footer';
@@ -94,35 +96,27 @@ const Cart = () => {
     }
   };
 
-  const handleChooseColor = (event) => {
+  const handleChooseSize = (event, cartItem) => {
     event.preventDefault();
-    // const newColor = event.target.value;
-    // setColor(newColor);
-    // setImages(product.colors.find((item) => item.color === newColor).images);
-    // setSlideIndex(0);
+    const newSize = event.target.value;
+    const { price, ...rest } = cartItem;
+    dispatch(
+      updateCart({
+        userId: currentUser._id,
+        ...rest,
+        totalPrice: price,
+        size: newSize,
+      })
+    );
   };
 
-  const handleChooseSize = (event) => {
-    event.preventDefault();
-    // const newColor = event.target.value;
-    // setColor(newColor);
-    // setImages(product.colors.find((item) => item.color === newColor).images);
-    // setSlideIndex(0);
-  };
-
-  const handleUpdateCart = async () => {
-    // dispatch(
-    //   updateCart({
-    //     userId: currentUser._id,
-    //     productId: product._id,
-    //     totalPrice: quantity * product.price,
-    //     image: images[1],
-    //     quantity,
-    //     color,
-    //     size,
-    //   })
-    // );
-  };
+  if (cart.isFetching) {
+    return (
+      <PreloaderContainer>
+        <Preloader src={process.env.PUBLIC_URL + '/preloaderLogo.svg'} />
+      </PreloaderContainer>
+    );
+  }
 
   return (
     <Container>
@@ -156,18 +150,14 @@ const Cart = () => {
                   <ProductOptions>
                     <ProductColor>
                       <b>Color: </b>
-                      <Select
-                        value={cartItem.color}
-                        onChange={handleChooseColor}
-                      >
-                        {cartItem.product.colors?.map((item) => (
-                          <Option key={item.color}>{item.color}</Option>
-                        ))}
-                      </Select>
+                      {cartItem.color}
                     </ProductColor>
                     <ProductSize>
                       <b>Size: </b>
-                      <Select value={cartItem.size} onChange={handleChooseSize}>
+                      <Select
+                        value={cartItem.size}
+                        onChange={(event) => handleChooseSize(event, cartItem)}
+                      >
                         {cartItem.product.sizes?.map((size) => (
                           <Option key={size}>{size}</Option>
                         ))}

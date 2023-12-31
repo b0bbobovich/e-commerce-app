@@ -84,6 +84,7 @@ const cartSlice = createSlice({
         }
       })
       .addCase(getCart.fulfilled, (state, action) => {
+        state.isFetching = false;
         action.payload.products.map((cartItem) => {
           state.items.push(cartItem);
           state.totalPrice += cartItem.price;
@@ -94,8 +95,8 @@ const cartSlice = createSlice({
         state.error = true;
       })
       .addCase(removeProduct.fulfilled, (state, action) => {
+        state.isFetching = false;
         if (action.payload.isRemoveSuccessful) {
-          state.isFetching = false;
           state.items = state.items.filter(
             (item) => item._id !== action.payload.item._id
           );
