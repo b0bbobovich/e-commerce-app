@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { openLoginDialog } from '../../redux/modalSlice';
 import {
   Container,
   Wrapper,
@@ -47,12 +46,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [shippingPrice, setShippingPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
-
-  useEffect(() => {
-    if (!currentUser) {
-      dispatch(openLoginDialog());
-    }
-  }, [dispatch, currentUser]);
 
   useEffect(() => {
     if (cart.totalPrice >= 50) {
