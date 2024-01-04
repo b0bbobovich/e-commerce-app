@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { mobile, tablet, desktop, widescreen } from '../../responsive';
+import { mobile } from '../../responsive';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingCartOutlined, ExitToApp } from '@material-ui/icons';
 import { Logout, Login } from '@mui/icons-material';
@@ -10,7 +10,11 @@ const Icon = css`
   margin-right: 5px;
 `;
 
-export const IconLabel = styled.span``;
+export const IconLabel = styled.span`
+  ${mobile({
+    display: 'none',
+  })};
+`;
 
 export const SearchIcon = styled(Search)`
   ${Icon};
@@ -45,7 +49,9 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   ${mobile({
-    padding: '10px 0',
+    alignItems: 'stretch',
+    padding: '5px 0',
+    flexDirection: 'column-reverse',
   })};
 `;
 
@@ -53,7 +59,24 @@ export const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  ${mobile({ display: 'none' })}
+  ${mobile({ padding: '5px' })};
+`;
+
+export const Right = styled.div`
+  flex: 2;
+  display: flex;
+  align-items: center;
+`;
+
+export const MenuContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  ${mobile({ flex: 'auto' })};
+`;
+
+export const LogoContainer = styled.div`
+  flex: 1;
 `;
 
 export const Select = styled.select`
@@ -70,30 +93,19 @@ export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 25px;
+  ${mobile({ flex: 'auto' })};
 `;
 
 export const Input = styled.input`
   padding: 5px;
   border: none;
-  ${mobile({ width: '50px' })};
-`;
-
-export const Center = styled.div`
-  flex: 1;
+  width: 100%;
 `;
 
 export const Logo = styled.h1`
   font-weight: bold;
   text-align: center;
   ${mobile({ fontSize: '24px' })};
-`;
-
-export const Right = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  ${mobile({ flex: 2, justifyContent: 'center' })};
 `;
 
 export const MenuItem = styled.div`

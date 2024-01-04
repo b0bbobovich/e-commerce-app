@@ -21,6 +21,8 @@ import {
   IconLabel,
   LogoutIcon,
   RegisterIcon,
+  MenuContainer,
+  LogoContainer,
 } from './Navbar.styled';
 import { logout } from '../../redux/userSlice';
 import {
@@ -58,46 +60,48 @@ const Navbar = () => {
             <Input placeholder='Search' autoComplete='off' />
           </SearchContainer>
         </Left>
-        <Center>
-          <NavLink to='/'>
-            <Logo>STORE.</Logo>
-          </NavLink>
-        </Center>
         <Right>
-          {!user ? (
-            <>
-              <MenuItem onClick={openRegisterDialog}>
-                <RegisterIcon />
-                <IconLabel>REGISTER</IconLabel>
-              </MenuItem>
-              <MenuItem onClick={openLoginDialog}>
-                <LoginIcon />
-                <IconLabel>SIGN IN</IconLabel>
-              </MenuItem>
-            </>
-          ) : (
-            <>
-              <MenuItem onClick={handleLogout}>
-                <LogoutIcon />
-                <IconLabel>LOGOUT</IconLabel>
-              </MenuItem>
-              <NavLink to='/cart'>
-                <MenuItem>
-                  <Box sx={{ marginRight: '10px' }}>
-                    <Badge
-                      badgeContent={quantity}
-                      overlap='rectangular'
-                      color='primary'
-                      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    >
-                      <CartIcon />
-                    </Badge>
-                  </Box>
-                  <IconLabel>CART</IconLabel>
+          <LogoContainer>
+            <NavLink to='/'>
+              <Logo>STORE.</Logo>
+            </NavLink>
+          </LogoContainer>
+          <MenuContainer>
+            {!user ? (
+              <>
+                <MenuItem onClick={openRegisterDialog}>
+                  <RegisterIcon />
+                  <IconLabel>REGISTER</IconLabel>
                 </MenuItem>
-              </NavLink>
-            </>
-          )}
+                <MenuItem onClick={openLoginDialog}>
+                  <LoginIcon />
+                  <IconLabel>SIGN IN</IconLabel>
+                </MenuItem>
+              </>
+            ) : (
+              <>
+                <NavLink to='/cart'>
+                  <MenuItem>
+                    <Box sx={{ marginRight: '10px' }}>
+                      <Badge
+                        badgeContent={quantity}
+                        overlap='rectangular'
+                        color='primary'
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                      >
+                        <CartIcon />
+                      </Badge>
+                    </Box>
+                    <IconLabel>CART</IconLabel>
+                  </MenuItem>
+                </NavLink>
+                <MenuItem onClick={handleLogout}>
+                  <LogoutIcon />
+                  <IconLabel>LOGOUT</IconLabel>
+                </MenuItem>
+              </>
+            )}
+          </MenuContainer>
         </Right>
       </Wrapper>
     </Container>

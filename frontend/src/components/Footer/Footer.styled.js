@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { mobile } from '../../responsive';
+import { mobile, tablet } from '../../responsive';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
   background-color: #fff7f7;
   ${mobile({ flexDirection: 'column' })};
+  ${tablet({ flexDirection: 'column' })};
 `;
 
 export const Left = styled.div`
