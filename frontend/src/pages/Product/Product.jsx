@@ -172,19 +172,22 @@ const Product = () => {
                 </Select>
               </Filter>
             )}
+            <>
+              <AmountContainer>
+                <FilterTitle>Quantity:</FilterTitle>
+                <Remove
+                  onClick={() => handleChooseQuantity('dec')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <Amount>{quantity}</Amount>
+                <Add
+                  onClick={() => handleChooseQuantity('inc')}
+                  style={{ cursor: 'pointer' }}
+                />
+              </AmountContainer>
+            </>
           </FilterContainer>
           <AddContainer>
-            <AmountContainer>
-              <Remove
-                onClick={() => handleChooseQuantity('dec')}
-                style={{ cursor: 'pointer' }}
-              />
-              <Amount>{quantity}</Amount>
-              <Add
-                onClick={() => handleChooseQuantity('inc')}
-                style={{ cursor: 'pointer' }}
-              />
-            </AmountContainer>
             <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>

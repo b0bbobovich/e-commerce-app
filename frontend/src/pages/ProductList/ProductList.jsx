@@ -9,6 +9,7 @@ import {
   FilterContainer,
   Filter,
   FilterText,
+  SelectContainer,
   Select,
   Option,
 } from './ProductList.styled';
@@ -47,32 +48,36 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select defaultValue='Color' name='colors' onChange={handleFilters}>
-            <Option disabled>Color</Option>
-            <Option>All</Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Beige</Option>
-            <Option>Blue</Option>
-            <Option>Green</Option>
-          </Select>
-          <Select defaultValue='Size' name='sizes' onChange={handleFilters}>
-            <Option disabled>Size</Option>
-            <Option>All</Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
-          </Select>
+          <SelectContainer>
+            <Select defaultValue='Color' name='colors' onChange={handleFilters}>
+              <Option disabled>Color</Option>
+              <Option>All</Option>
+              <Option>White</Option>
+              <Option>Black</Option>
+              <Option>Beige</Option>
+              <Option>Blue</Option>
+              <Option>Green</Option>
+            </Select>
+            <Select defaultValue='Size' name='sizes' onChange={handleFilters}>
+              <Option disabled>Size</Option>
+              <Option>All</Option>
+              <Option>XS</Option>
+              <Option>S</Option>
+              <Option>M</Option>
+              <Option>L</Option>
+              <Option>XL</Option>
+            </Select>
+          </SelectContainer>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select onChange={(event) => setSort(event.target.value)}>
-            <Option value='newest'>Newest</Option>
-            <Option value='asc'>Price (asc)</Option>
-            <Option value='desc'>Price (desc)</Option>
-          </Select>
+          <SelectContainer>
+            <Select onChange={(event) => setSort(event.target.value)}>
+              <Option value='newest'>Newest</Option>
+              <Option value='asc'>Price (asc)</Option>
+              <Option value='desc'>Price (desc)</Option>
+            </Select>
+          </SelectContainer>
         </Filter>
       </FilterContainer>
       <Products category={category} filters={filters} sort={sort} />
