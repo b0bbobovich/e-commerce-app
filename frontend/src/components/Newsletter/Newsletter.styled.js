@@ -8,18 +8,20 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  ${mobile({ height: '40vh' })};
 `;
 
 export const Title = styled.h1`
   font-size: 70px;
   margin-bottom: 20px;
+  ${mobile({ display: 'none' })};
 `;
 
 export const Description = styled.p`
   font-size: 24px;
   font-weight: 200;
   margin-bottom: 20px;
-  ${mobile({ textAlign: 'center' })};
+  ${mobile({ textAlign: 'center', fontSize: '20px' })};
 `;
 
 export const Form = styled.form`
