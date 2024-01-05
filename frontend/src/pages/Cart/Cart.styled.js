@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { mobile } from '../../responsive';
+import { mobile, tablet } from '../../responsive';
 import { Link } from 'react-router-dom';
 import { Clear } from '@material-ui/icons';
 
@@ -47,7 +47,7 @@ export const TopText = styled.span`
 export const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
-  ${mobile({ flexDirection: 'column' })};
+  ${tablet({ flexDirection: 'column-reverse' })};
 `;
 
 export const Info = styled.div`
@@ -61,17 +61,13 @@ export const Product = styled.div`
   border: solid 1px lightgray;
   border-radius: 10px;
   margin: 0 20px 20px 0;
-  ${mobile({ flexDirection: 'column' })};
-`;
-
-export const ClearButton = styled(Clear)`
-  margin: 10px;
-  cursor: pointer;
+  ${tablet({ margin: '20px 0' })};
 `;
 
 export const Image = styled.img`
   width: 200px;
   object-fit: contain;
+  ${mobile({ width: '100px' })}
 `;
 
 export const Details = styled.div`
@@ -80,19 +76,27 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  ${mobile({})};
+  ${mobile({ gap: '10px', padding: '0', justifyContent: 'center' })}
+`;
+
+export const ClearButton = styled(Clear)`
+  margin: 10px;
+  cursor: pointer;
+  ${mobile({ margin: '5px' })}
 `;
 
 export const ProductOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${mobile({ flexDirection: 'column', alignItems: 'start', gap: '15px' })}
 `;
 
 export const ProductName = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  ${mobile({ display: 'none' })}
 `;
 
 export const ProductColor = styled.div`
@@ -142,6 +146,7 @@ export const PriceDetail = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${mobile({ flexDirection: 'column', alignItems: 'start', gap: '10px' })}
 `;
 
 export const Summary = styled.div`
