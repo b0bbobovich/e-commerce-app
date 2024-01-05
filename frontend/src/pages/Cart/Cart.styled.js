@@ -20,12 +20,14 @@ export const Top = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  ${mobile({ padding: '0 0 20px 0' })}
 `;
 
 export const TopButton = styled.button`
   padding: 10px;
   cursor: pointer;
   background-color: transparent;
+  ${mobile({ width: '100%' })}
 `;
 
 export const NavLink = styled(Link)`
