@@ -27,7 +27,7 @@ export const TopButton = styled.button`
   padding: 10px;
   cursor: pointer;
   background-color: transparent;
-  ${mobile({ width: '100%' })}
+  ${tablet({ width: '100%' })}
 `;
 
 export const NavLink = styled(Link)`
@@ -37,7 +37,7 @@ export const NavLink = styled(Link)`
 `;
 
 export const TopTextContainer = styled.div`
-  ${mobile({ display: 'none' })};
+  ${tablet({ display: 'none' })};
 `;
 
 export const TopText = styled.span`
@@ -60,7 +60,7 @@ export const Product = styled.div`
   display: flex;
   height: 200px;
   justify-content: space-between;
-  border: solid 1px lightgray;
+  border: solid 1px lightgrey;
   border-radius: 10px;
   margin: 0 20px 20px 0;
   ${tablet({ margin: '20px 0' })};
@@ -74,7 +74,7 @@ export const Image = styled.img`
 
 export const Details = styled.div`
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -153,7 +153,7 @@ export const PriceDetail = styled.div`
 
 export const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid lightgray;
+  border: 0.5px solid lightgrey;
   border-radius: 10px;
   padding: 20px;
   height: max-content;

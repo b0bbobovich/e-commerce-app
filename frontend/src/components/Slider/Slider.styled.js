@@ -3,7 +3,7 @@ import { mobile } from '../../responsive';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   position: relative;
   overflow: hidden;

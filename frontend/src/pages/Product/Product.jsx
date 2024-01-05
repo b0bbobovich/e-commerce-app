@@ -31,6 +31,7 @@ import {
   PreloaderContainer,
   Preloader,
 } from './Product.styled';
+import Slider from '../../components/Slider/Slider';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import { openLoginDialog } from '../../redux/modalSlice';
 
@@ -172,22 +173,20 @@ const Product = () => {
                 </Select>
               </Filter>
             )}
-            <>
-              <AmountContainer>
-                <FilterTitle>Quantity:</FilterTitle>
-                <Remove
-                  onClick={() => handleChooseQuantity('dec')}
-                  style={{ cursor: 'pointer' }}
-                />
-                <Amount>{quantity}</Amount>
-                <Add
-                  onClick={() => handleChooseQuantity('inc')}
-                  style={{ cursor: 'pointer' }}
-                />
-              </AmountContainer>
-            </>
           </FilterContainer>
           <AddContainer>
+            <AmountContainer>
+              <FilterTitle>Quantity:</FilterTitle>
+              <Remove
+                onClick={() => handleChooseQuantity('dec')}
+                style={{ cursor: 'pointer' }}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                onClick={() => handleChooseQuantity('inc')}
+                style={{ cursor: 'pointer' }}
+              />
+            </AmountContainer>
             <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>

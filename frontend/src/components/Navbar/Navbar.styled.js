@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { mobile } from '../../responsive';
+import { mobile, tablet } from '../../responsive';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingCartOutlined, ExitToApp } from '@material-ui/icons';
 import { Logout, Login } from '@mui/icons-material';
@@ -48,9 +48,8 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({
-    alignItems: 'stretch',
-    padding: '5px 0',
+  ${tablet({
+    padding: '5px 10px',
     flexDirection: 'column-reverse',
   })};
 `;
@@ -59,20 +58,23 @@ export const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  ${mobile({ padding: '5px' })};
+  width: 100%;
+  ${tablet({ padding: '5px' })};
 `;
 
 export const Right = styled.div`
   flex: 2;
   display: flex;
   align-items: center;
+  width: 100%;
+  ${tablet({ justifyContent: 'space-between' })};
 `;
 
 export const MenuContainer = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: flex-end;
-  ${mobile({ flex: 'auto' })};
+  ${tablet({})};
 `;
 
 export const LogoContainer = styled.div`
@@ -93,7 +95,7 @@ export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 25px;
-  ${mobile({ flex: 'auto' })};
+  ${tablet({ flex: 'auto' })};
 `;
 
 export const Input = styled.input`
@@ -106,6 +108,7 @@ export const Logo = styled.h1`
   font-weight: bold;
   text-align: center;
   ${mobile({ fontSize: '24px' })};
+  ${tablet({ textAlign: 'start' })};
 `;
 
 export const MenuItem = styled.div`

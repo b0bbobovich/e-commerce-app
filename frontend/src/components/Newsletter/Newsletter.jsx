@@ -39,7 +39,7 @@ const Newsletter = () => {
     return (
         <Container>
             <Title>Newsletter</Title>
-            <Description>Get timely updates from your favourite products</Description>
+            <Description>Get timely updates from your favorite products</Description>
             <Form onSubmit={handleSubmit}>
                 <Input
                     type="email"

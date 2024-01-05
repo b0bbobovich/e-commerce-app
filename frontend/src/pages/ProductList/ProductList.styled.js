@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from '../../responsive';
+import { mobile, tablet } from '../../responsive';
 
 export const Container = styled.div``;
 
@@ -15,13 +15,14 @@ export const FilterContainer = styled.div`
     alignItems: 'start',
     justifyContent: 'start',
   })};
+  ${tablet({ margin: '0 20px' })}
 `;
 
 export const Filter = styled.div`
   margin: 20px;
   display: flex;
   align-items: center;
-  ${mobile({ margin: '0 20px', flexDirection: 'column', alignItems: 'start' })};
+  ${tablet({ margin: '0', flexDirection: 'column', alignItems: 'start' })}
 `;
 
 export const FilterText = styled.span`
@@ -33,7 +34,7 @@ export const SelectContainer = styled.div`
   display: flex;
   margin: 0 0 0 20px;
   gap: 20px;
-  ${mobile({ margin: '10px 0' })};
+  ${tablet({ margin: '10px 0' })};
 `;
 
 export const Select = styled.select`

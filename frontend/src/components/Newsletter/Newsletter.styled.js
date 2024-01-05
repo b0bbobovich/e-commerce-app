@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from '../../responsive';
+import { mobile, tablet } from '../../responsive';
 
 export const Container = styled.div`
   height: 60vh;
@@ -20,8 +20,10 @@ export const Title = styled.h1`
 export const Description = styled.p`
   font-size: 24px;
   font-weight: 200;
-  margin-bottom: 20px;
-  ${mobile({ textAlign: 'center', fontSize: '20px' })};
+  margin: 0 0 30px 0;
+  text-align: center;
+  ${mobile({ fontSize: '7vw' })};
+  ${tablet({ fontSize: '4vw' })}
 `;
 
 export const Form = styled.form`

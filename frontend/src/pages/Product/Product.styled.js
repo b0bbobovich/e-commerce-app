@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { mobile } from '../../responsive';
+import { desktop, mobile, tablet } from '../../responsive';
 
 export const Container = styled.div``;
 
 export const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: '10px', flexDirection: 'column' })};
+  ${tablet({ padding: '10px', flexDirection: 'column' })};
 `;
 
 export const SliderContainer = styled.div`
@@ -65,13 +65,12 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  ${mobile({ height: '40vh' })};
 `;
 
 export const InfoContainer = styled.div`
   flex: 1;
   padding: 0 50px;
-  ${mobile({ padding: '10px' })};
+  ${tablet({ padding: '10px' })};
 `;
 
 export const Title = styled.h1`
@@ -88,11 +87,12 @@ export const Price = styled.span`
 `;
 
 export const FilterContainer = styled.div`
-  margin: 30px 0;
+  margin: 20px 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
   justify-content: space-between;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 export const Filter = styled.div`
@@ -114,11 +114,12 @@ export const Select = styled.select`
 export const Option = styled.option``;
 
 export const AddContainer = styled.div`
-  width: 50%;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  ${'' /* align-items: center; */}
   justify-content: space-between;
-  ${mobile({ width: '100%' })};
+  gap: 20px;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 export const AmountContainer = styled.div`
@@ -141,7 +142,7 @@ export const Amount = styled.span`
 export const Button = styled.button`
   padding: 15px;
   border: 2px solid teal;
-  bacground-color: white;
+  background-color: white;
   cursor: pointer;
   font-weight: 500;
   &: hover {
