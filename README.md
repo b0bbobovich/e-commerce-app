@@ -1,7 +1,7 @@
 Link to the website:
 https://bbshop.netlify.app 
 
-Link to the admin panel below:
+Link to the admin panel:
 https://boboshop-admin.onrender.com   
 <br>
 ### CREDENTIALS   
