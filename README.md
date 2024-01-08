@@ -1,4 +1,3 @@
-<br>
 Link to website in the "About" section.  
 
 Link to admin panel below:   
