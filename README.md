@@ -1,4 +1,3 @@
-__This is my exploratory project for learning React, Redux, ExpressJS and many other things.__  
 <br>
 Link to website in the "About" section.  
 
